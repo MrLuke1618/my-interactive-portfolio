@@ -3,25 +3,11 @@
 import { GoogleGenAI, Type } from '@google/genai';
 import { Language } from '../types';
 
-// Use 'let' to allow re-initialization
-let ai: GoogleGenAI | null = null;
+// FIX: Per guidelines, initialize with API_KEY from environment variables.
+// The guideline specifies `process.env.API_KEY`; in a Vite client app, the equivalent is `import.meta.env.VITE_API_KEY`.
+// We assume this is configured in the environment as per the guidelines.
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
 
-/**
- * Initializes or re-initializes the GoogleGenAI instance.
- * @param apiKey The API key to use. If empty or null, the instance will be cleared.
- */
-export const initializeAi = (apiKey: string) => {
-    if (apiKey) {
-        ai = new GoogleGenAI({ apiKey });
-        console.log("Gemini AI Service Initialized.");
-    } else {
-        ai = null;
-        console.warn("Gemini AI Service De-initialized. API key cleared.");
-    }
-};
-
-
-const getMissingApiKeyError = () => new Error("AI features are unavailable. The API key is not configured for this deployment environment.");
 
 const chatbotSystemInstruction = `
 You are an AI assistant for Hoang Cao Minh's portfolio. Your primary role is to answer questions on his behalf, as if you were him. You must adopt his persona.
@@ -35,7 +21,7 @@ You are an AI assistant for Hoang Cao Minh's portfolio. Your primary role is to 
 **Key Portfolio Information:**
 - **Summary:** The summary page includes an interactive dashboard for quick navigation to key sections like Experience, AI Projects, Education, and Skills.
 - **Projects:** My AI projects include Content Compass, Customer Insights AI, Doc QA Assistant, AI Audio Studio, IELTS Practice Pod, Creator’s Toolbox, Shopify Growth Video Idea Generator, and Kokoro English Guide.
-- **AI Tools:** The AI tools on this site require visitors to enter their own Google AI Studio API key in the 'Help & Support' section to function. I've set it up this way so anyone can try them without using my personal key.
+- **AI Tools:** The AI tools on this site are powered by the Gemini API and are fully functional.
 - **Experience:** I have over six years of experience in media, with roles like Video Editor and News Editor. A key achievement was growing a YouTube channel from 1k to 72k subscribers.
 - **Education:** I have a Bachelor's in IT and am currently pursuing a Master's in Communication and Media Studies at Dublin City University.
 
@@ -65,7 +51,6 @@ Your Correct Response: "Great idea! Let's play a riddle game. I'll give you a ri
 
 // --- Helper for API calls ---
 const callGemini = async (prompt: string, schema: any) => {
-    if (!ai) throw getMissingApiKeyError();
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
@@ -87,19 +72,19 @@ const callGemini = async (prompt: string, schema: any) => {
              throw new Error("The AI returned an unexpected format. Please try again.");
         }
     } catch (e) {
-        if (e instanceof Error && e.message.includes("API key is not configured")) throw e;
-        
         console.error("Gemini API call failed", e);
-        if (e instanceof Error) throw e;
+        if (e instanceof Error) {
+            if (e.message.includes("API key not valid")) {
+                throw new Error("The API key is invalid. Please check the environment configuration.");
+            }
+            throw e;
+        }
         throw new Error("Failed to get a response from the AI. Please check your connection and try again.");
     }
 }
 
 
 export const getChatbotResponse = async (prompt: string, history: {role: 'user' | 'model', parts: {text: string}[]}[]): Promise<string> => {
-    if (!ai) {
-        throw getMissingApiKeyError();
-    }
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
