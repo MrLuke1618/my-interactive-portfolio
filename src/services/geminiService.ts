@@ -6,7 +6,7 @@ import { Language } from '../types';
 // FIX: Per coding guidelines, initialize AI with API_KEY from environment variables.
 // The AI client is initialized once at the module level.
 // Assumes process.env.API_KEY is available and valid.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 
 // FIX: Removed deprecated initializeAi function. Initialization is done at module level.
 
@@ -47,6 +47,9 @@ Your Correct Response: "Great idea! Let's play a riddle game. I'll give you a ri
 
 // --- Helper for API calls ---
 const callGemini = async (prompt: string, schema: any) => {
+    if (!process.env.API_KEY) {
+        throw getMissingApiKeyError();
+    }
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
@@ -57,8 +60,7 @@ const callGemini = async (prompt: string, schema: any) => {
             },
         });
 
-        // FIX: Per coding guidelines, access the .text property directly.
-        const jsonStr = response.text.trim();
+        const jsonStr = (response.text ?? '').trim();
         if (!jsonStr) {
             throw new Error("The AI returned an empty response. Please try again.");
         }
@@ -82,6 +84,9 @@ const callGemini = async (prompt: string, schema: any) => {
 
 
 export const getChatbotResponse = async (prompt: string, history: {role: 'user' | 'model', parts: {text: string}[]}[]): Promise<string> => {
+    if (!process.env.API_KEY) {
+        return "The AI assistant is currently offline as the API key is not configured correctly.";
+    }
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
@@ -90,10 +95,8 @@ export const getChatbotResponse = async (prompt: string, history: {role: 'user' 
                 systemInstruction: chatbotSystemInstruction,
             },
         });
-        // FIX: Per coding guidelines, access the .text property directly.
-        return response.text;
+        return response.text ?? '';
     } catch (e) {
-        // FIX: Improved error handling for API key issues.
         console.error("Gemini API call failed", e);
         if (e instanceof Error && (e.message.includes("API key not valid") || e.message.includes("API key not found"))) {
             return "The AI assistant is currently offline as the API key is not configured correctly.";
