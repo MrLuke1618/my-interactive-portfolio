@@ -1,11 +1,15 @@
 /// <reference types="vite/client" />
 
-// FIX: Replaced `declare var process` with a namespace augmentation.
-// This prevents redeclaration errors with Node's global `process` object
-// and fixes type errors in `vite.config.ts` while still providing
-// type information for `process.env.API_KEY` in the client-side code.
+/**
+ * Declares the `process` global for TypeScript in a client-side (browser) environment.
+ * Vite's `define` config option will replace `process.env.API_KEY` with a string literal during the build,
+ * but TypeScript needs this declaration to understand the code before the replacement happens.
+ */
+// FIX: Augment the NodeJS namespace to add custom env variables.
+// This avoids the "Cannot redeclare block-scoped variable 'process'" error
+// that occurs when @types/node is present in the project.
 declare namespace NodeJS {
   interface ProcessEnv {
-    readonly API_KEY?: string;
+    API_KEY?: string;
   }
 }
