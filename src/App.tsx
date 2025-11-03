@@ -4,7 +4,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { i18n } from './constants';
 import { type Language, type NavigationItem, type Project, type Experience, type EducationItem, type Skill, type Link as LinkType, type ToolStrings, type ChatMessage, HelpAndSupportStrings, NavigationLink } from './types';
-import { ArrowUpRight, Copy, ThumbsUp, ChevronLeft, ChevronRight, BrainCircuit, ArrowUp, Send, AlertTriangle } from 'lucide-react';
+import { ArrowUpRight, Copy, ThumbsUp, ChevronLeft, ChevronRight, BrainCircuit, ArrowUp, Send } from 'lucide-react';
+// FIX: Removed `initializeAi` as it is no longer exported or needed. The API key is now handled by environment variables.
 import { getChatbotResponse, generateYoutubeTitles, countWordsInScript, generateHeadlines, explainIdiom, generateClanNames } from './services/geminiService';
 import ChatBubble from './components/ChatBubble';
 import ReactMarkdown from 'react-markdown';
@@ -144,6 +145,8 @@ const BackToTopButton: React.FC<{ show: boolean; onClick: () => void; }> = ({ sh
         </button>
     );
 };
+
+// FIX: Removed DisabledToolView as the API key is now assumed to be set via environment variables, making this component obsolete.
 
 // --- Section Views ---
 
@@ -530,7 +533,7 @@ const HeadlineGeneratorView: React.FC<{ title: string; language: Language; strin
         try {
             const result = await generateHeadlines(topic, audience, language);
             setHeadlines(result);
-        } catch (err) => {
+        } catch (err) {
             setError(err instanceof Error ? err.message : 'An unknown error occurred.');
         } finally {
             setIsLoading(false);
@@ -691,7 +694,7 @@ const ClanNameGeneratorView: React.FC<{ title: string; language: Language; strin
         try {
             const result = await generateClanNames(theme, count, language);
             setNames(result);
-        } catch (err) => {
+        } catch (err) {
             setError(err instanceof Error ? err.message : 'An unknown error occurred.');
         } finally {
             setIsLoading(false);
@@ -791,6 +794,7 @@ const ChatAssistant: React.FC<{ onThemeChange: (theme: 'default' | 'synthwave') 
     
     const handleSendMessage = async (prefilledMessage?: string) => {
         const trimmedInput = (prefilledMessage || userInput).trim();
+        // FIX: Removed !isApiKeySet check. Assumed to be always available.
         if (!trimmedInput || isLoading) return;
         
         setShowFAQs(false);
@@ -893,6 +897,7 @@ const HelpAndSupportView: React.FC<{ title: string; onThemeChange: (theme: 'defa
                 >
                     {strings.chatTitle}
                 </button>
+                {/* FIX: Removed API Key tab per guidelines. */}
             </div>
             
             {activeTab === 'guide' && (
@@ -912,6 +917,8 @@ const HelpAndSupportView: React.FC<{ title: string; onThemeChange: (theme: 'defa
 
             {activeTab === 'chat' && <ChatAssistant onThemeChange={onThemeChange} strings={chatStrings} faqs={strings.faqs} />}
             
+            {/* FIX: Removed API Key settings view per guidelines. */}
+
         </>
     );
 };
@@ -936,6 +943,8 @@ const App: React.FC = () => {
     };
 
     const [activeSection, setActiveSection] = useState<string>(getFirstSectionId(data.navigation));
+
+    // FIX: Removed API key state and initialization logic. The key is now handled exclusively by environment variables as per guidelines.
 
     useEffect(() => {
         const sectionExists = data.navigation.some(item => item.type === 'link' && item.id === activeSection);

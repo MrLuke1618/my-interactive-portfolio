@@ -1,13 +1,11 @@
 
 
+
 import { GoogleGenAI, Type } from '@google/genai';
 import { Language } from '../types';
 
-// FIX: Per guidelines, initialize with API_KEY from environment variables.
-// The guideline specifies `process.env.API_KEY`; in a Vite client app, the equivalent is `import.meta.env.VITE_API_KEY`.
-// We assume this is configured in the environment as per the guidelines.
-const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
-
+// FIX: Per Gemini API guidelines, initialize the SDK using the API_KEY from environment variables.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const chatbotSystemInstruction = `
 You are an AI assistant for Hoang Cao Minh's portfolio. Your primary role is to answer questions on his behalf, as if you were him. You must adopt his persona.
@@ -15,15 +13,8 @@ You are an AI assistant for Hoang Cao Minh's portfolio. Your primary role is to 
 **Core Rules:**
 - **Persona:** ALWAYS speak in the first person ("I", "my", "me"). You are representing Hoang Cao Minh.
 - **NEVER** identify yourself as an AI, a chatbot, or an assistant when answering about his skills, experience, etc.
-- **Knowledge:** Your knowledge is based on the information provided in the portfolio. Refer to the key information below.
+- **Knowledge:** Your knowledge is based on the information provided in the portfolio (skills, experience, projects, etc.). You can also answer general knowledge questions if asked.
 - **Tone:** Be professional, friendly, and helpful. Keep answers concise.
-
-**Key Portfolio Information:**
-- **Summary:** The summary page includes an interactive dashboard for quick navigation to key sections like Experience, AI Projects, Education, and Skills.
-- **Projects:** My AI projects include Content Compass, Customer Insights AI, Doc QA Assistant, AI Audio Studio, IELTS Practice Pod, Creator’s Toolbox, Shopify Growth Video Idea Generator, and Kokoro English Guide.
-- **AI Tools:** The AI tools on this site are powered by the Gemini API and are fully functional.
-- **Experience:** I have over six years of experience in media, with roles like Video Editor and News Editor. A key achievement was growing a YouTube channel from 1k to 72k subscribers.
-- **Education:** I have a Bachelor's in IT and am currently pursuing a Master's in Communication and Media Studies at Dublin City University.
 
 **Special Modes (These are exceptions to the persona rule):**
 
@@ -51,6 +42,7 @@ Your Correct Response: "Great idea! Let's play a riddle game. I'll give you a ri
 
 // --- Helper for API calls ---
 const callGemini = async (prompt: string, schema: any) => {
+    // FIX: Per guidelines, we assume the API key is set via environment variables. The `ai` instance is now a const.
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
@@ -73,18 +65,14 @@ const callGemini = async (prompt: string, schema: any) => {
         }
     } catch (e) {
         console.error("Gemini API call failed", e);
-        if (e instanceof Error) {
-            if (e.message.includes("API key not valid")) {
-                throw new Error("The API key is invalid. Please check the environment configuration.");
-            }
-            throw e;
-        }
+        if (e instanceof Error) throw e;
         throw new Error("Failed to get a response from the AI. Please check your connection and try again.");
     }
 }
 
 
 export const getChatbotResponse = async (prompt: string, history: {role: 'user' | 'model', parts: {text: string}[]}[]): Promise<string> => {
+    // FIX: Per guidelines, we assume the API key is set via environment variables.
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
