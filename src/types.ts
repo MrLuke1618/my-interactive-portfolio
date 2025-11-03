@@ -80,6 +80,24 @@ export interface HelpAndSupportStrings {
         question: string;
         answer: string;
     }[];
+    apiKeySetup: {
+        title: string;
+        heading: string;
+        p1: string;
+        p2: string;
+        linkText: string;
+        inputLabel: string;
+        inputPlaceholder: string;
+        saveButton: string;
+        clearButton: string;
+        statusSet: string;
+        statusNotSet: string;
+        disabledTitle: string;
+        disabledMessage: string;
+        disabledMessageChat: string;
+        disabledPlaceholder: string;
+        buttonText: string;
+    };
 }
 
 export interface ToolStrings {
@@ -162,7 +180,6 @@ export interface ToolStrings {
 export interface LanguageData {
     navigation: NavigationItem[];
     summaryText: string;
-    keyStats: { value: string; label: string }[];
     experienceData: Experience[];
     projectsData: Project[];
     educationData: EducationItem[];

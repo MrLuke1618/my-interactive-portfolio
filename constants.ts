@@ -39,64 +39,61 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         clanNameGenerator: 'AI Gaming Clan Name Generator',
         helpAndSupport: 'Help & Support',
     },
-    summaryText: "Video Editor and News Editor with over six years of experience in elevating content clarity and reader engagement across multiple platforms. Experienced in video editing, Figma, and Canva, with a history of producing impactful cryptocurrency videos and authoring over 1,000 articles. Passionate about leveraging skills in social media management and software development to pioneer innovative content strategies, drive audience interaction, and develop powerful AI tools for the future.",
-    keyStats: [
-      { value: '6+', label: 'Years in Media' },
-      { value: '1,000+', label: 'Articles Written' },
-      { value: '400+', label: 'Articles Edited' },
-      { value: '52+', label: 'Videos Produced' },
-      { value: '8+', label: 'Apps Developed' },
-    ],
+    summaryText: "Hello, I'm Hoang. With over six years of experience as a Video and News Editor, I specialize in enhancing content clarity and engaging readers across multiple platforms. My expertise in video editing, Figma, and Canva has enabled me to produce impactful cryptocurrency videos and author over 1,000 articles. I'm passionate about merging my skills in social media and software development to pioneer innovative content strategies, drive audience interaction, and build the powerful AI tools you see here.",
     experienceData: [
         { 
             role: 'VIDEO EDITOR/NEWS EDITOR',
             company: 'TB Group (Hanoi, Vietnam)',
-            period: 'Jul 2023 – Jan 2024',
+            period: 'Jul 2023 - Jan 2024',
             achievements: [
                 'Edited 400+ articles in 6 months, enhancing content quality and clarity.',
-                'Authored 1,000+ articles on cryptocurrency and tech, enhancing reader engagement and knowledge.',
-                'Created internal guides on Canva, boosting team collaboration and skill development.',
-                'Conducted interviews with industry leaders, enriching content quality and market insight.',
+                'Developed strong writing and editing skills through diverse article topics.',
+                'Participated in team activities, fostering collaboration and communication.',
+                'Improved personal development through extracurricular involvement.',
+                'Contributed to team success with effective editing and content strategies.',
             ]
         },
         { 
             role: 'NEWS EDITOR',
             company: 'Cryptoday (Hanoi, Vietnam)',
-            period: 'Jun 2022 – May 2023',
+            period: 'Jun 2022 - May 2023',
             achievements: [
-                 'Led media team to produce 52 cryptocurrency videos, enhancing content clarity and delivery.',
-                 'Monitored top crypto publications for trend analysis, ensuring up-to-date reporting.',
-                 'Directed creation of tutorial videos, improving audience engagement significantly.',
-                 'Managed video production, ensuring timely completion and clear communication.',
+                'Authored 1,000+ articles on cryptocurrency and tech, enhancing reader engagement and knowledge.',
+                'Created internal guides on Canva, boosting team collaboration and skill development.',
+                'Conducted interviews with industry leaders, enriching content quality and market insight.',
+                'Monitored top crypto publications for trend analysis, ensuring up-to-date reporting.',
             ]
         },
         { 
             role: 'VIDEO EDITOR',
             company: 'ECI HOLDINGS JOINT STOCK COMPANY (Hanoi, Vietnam)',
-            period: 'Feb 2022 – Apr 2022',
+            period: 'Feb 2022 - Apr 2022',
             achievements: [
-                'Led video editing projects from storyboard to final format.',
-                'Developed creative concepts and compelling video narratives.'
+                'Led media team to produce 52 cryptocurrency videos, enhancing content clarity and delivery.',
+                'Managed video production, ensuring timely completion and clear communication.',
+                'Directed creation of tutorial videos, improving audience engagement significantly.',
             ]
         },
         { 
             role: 'VIDEO EDITOR (FULL TIME)',
             company: 'Lotus Media (Hanoi, Vietnam)',
-            period: 'Oct 2018 – Jan 2022',
+            period: 'Oct 2018 - Jan 2022',
             achievements: [
-                 'Increased YouTube subscribers from 1,000 to 72,000.',
-                 'Managed multiple channels, enhancing audience interaction.',
-                 'Oversaw post-production, ensuring quality and continuity.'
+                'Led video editing projects from storyboard to final format.',
+                'Increased YouTube subscribers from 1,000 to 72,000.',
+                'Managed multiple channels, enhancing audience interaction.',
+                'Oversaw post-production, ensuring quality and continuity.',
+                'Developed creative concepts and compelling video narratives.',
             ]
         },
         { 
             role: 'VIDEO EDITOR (PART TIME)',
             company: 'Pinetree Securities (Hanoi, Vietnam)',
-            period: 'Dec 2020 – Apr 2021',
+            period: 'Dec 2020 - Apr 2021',
             achievements: [
                 'Applied subtitles and effects to enhance YouTube videos, ensuring timely task completion.',
+                'Managed deadlines and communication, contributing to seamless production workflows.',
                 'Improved video quality through color correction, resulting in positive viewer feedback.',
-                'Managed deadlines and communication, contributing to seamless production workflows.'
             ]
         },
     ],
@@ -107,6 +104,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         { name: 'AI Audio Studio', description: 'Create, edit, and enhance audio with AI.', link: 'https://mrluke1618.github.io/ai-audio-studio' },
         { name: 'IELTS Practice Pod', description: 'AI-powered practice for all 4 IELTS skills.', link: 'https://mrluke1618.github.io/ielts-practice-app' },
         { name: 'Creator’s Toolbox', description: 'Toolkit for creators and editors.', link: 'https://mrluke1618.github.io/mrluke1818-creators-toolbox' },
+        { name: 'Shopify Growth Video Idea Generator', description: 'Generates targeted video ideas to boost Shopify store growth.', link: 'https://mrluke1618.github.io/shopify-growth-video-idea-generator-v2/' },
         { name: 'Kokoro English Guide', description: 'Interactive English learning guide.', link: 'https://mrluke1618.github.io/Kokoro-English-Guide/preloader.html' },
     ],
     educationData: [
@@ -240,7 +238,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         toolboxContent: {
             heading: "What is the AI Toolbox Demo?",
             p1: "The AI Toolbox is an interactive collection of AI-powered mini-applications that I've built. Each tool is designed to solve a specific problem for a particular audience, from content creators and translators to gamers.",
-            p2: "These demos showcase my ability to leverage the Gemini API to create practical and creative solutions. Feel free to play around with them! They are all fully functional."
+            p2: "These demos showcase my ability to leverage the Gemini API to create practical and creative solutions. Feel free to play around with them! They are all fully functional if you provide an API key."
         },
         faqs: [
             {
@@ -265,7 +263,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
             },
             {
                 question: "Are the AI tools in the toolbox functional?",
-                answer: "Absolutely! Every tool in the AI Toolbox Demo is a fully functional mini-app built to showcase my skills with the Gemini API. Feel free to use them."
+                answer: "Absolutely! Every tool in the AI Toolbox Demo is a fully functional mini-app. To use them on this live site, you'll need to provide your own Google AI Studio API Key in the 'API Key' tab under 'Help & Support'."
             },
             {
                 question: "How can I contact you?",
@@ -283,7 +281,25 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
                 question: "What is this portfolio website built with?",
                 answer: "This is a custom-built interactive portfolio using React, TypeScript, and Tailwind CSS, powered by the Google Gemini API for its AI features."
             }
-        ]
+        ],
+        apiKeySetup: {
+            title: "API Key",
+            heading: "Set Your API Key",
+            p1: "To activate the AI features on this live demo, you need to provide your own Google AI Studio API key.",
+            p2: "Your key is saved securely in your browser's local storage and is never sent to any server but Google's. You can get your own free key from",
+            linkText: "Google AI Studio",
+            inputLabel: "Your Google AI Studio API Key",
+            inputPlaceholder: "Paste your API key here",
+            saveButton: "Save Key",
+            clearButton: "Clear Key",
+            statusSet: "API Key is set and active.",
+            statusNotSet: "API Key not found.",
+            disabledTitle: "AI Feature Disabled",
+            disabledMessage: "To use this tool, please set your Google AI Studio API key in the 'Help & Support' section.",
+            disabledMessageChat: "The AI assistant is currently offline. To enable it, please provide your own Google AI Studio API key in the 'API Key' tab within the 'Help & Support' section.",
+            disabledPlaceholder: "Set API Key to enable chat...",
+            buttonText: "Go to API Key Setup"
+        }
     }
   },
   vi: {
@@ -321,24 +337,18 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         clanNameGenerator: 'Công cụ tạo tên Clan Game bằng AI',
         helpAndSupport: 'Trợ giúp & Hỗ trợ',
     },
-    summaryText: "Biên tập viên Video và Tin tức với hơn sáu năm kinh nghiệm trong việc nâng cao sự rõ ràng của nội dung và sự tương tác của người đọc trên nhiều nền tảng. Có kinh nghiệm về chỉnh sửa video, Figma và Canva, với lịch sử sản xuất các video về tiền điện tử có ảnh hưởng và tác giả của hơn 1.000 bài viết. Đam mê tận dụng các kỹ năng quản lý mạng xã hội và phát triển phần mềm để đi tiên phong trong các chiến lược nội dung sáng tạo, thúc đẩy sự tương tác của khán giả và phát triển các công cụ AI mạnh mẽ cho tương lai.",
-    keyStats: [
-        { value: '6+', label: 'Năm trong ngành Truyền thông' },
-        { value: '1,000+', label: 'Bài viết đã xuất bản' },
-        { value: '400+', label: 'Bài viết đã chỉnh sửa' },
-        { value: '52+', label: 'Video đã sản xuất' },
-        { value: '8+', label: 'Ứng dụng đã phát triển' },
-    ],
+    summaryText: "Xin chào, tôi là Hoàng. Với hơn sáu năm kinh nghiệm làm Biên tập viên Video và Tin tức, tôi chuyên nâng cao sự rõ ràng của nội dung và thu hút người đọc trên nhiều nền tảng. Chuyên môn của tôi về chỉnh sửa video, Figma và Canva đã giúp tôi sản xuất các video về tiền điện tử có sức ảnh hưởng và viết hơn 1.000 bài báo. Tôi đam mê kết hợp các kỹ năng của mình trong quản lý mạng xã hội và phát triển phần mềm để đi tiên phong trong các chiến lược nội dung sáng tạo, thúc đẩy tương tác của khán giả và xây dựng các công cụ AI mạnh mẽ mà bạn thấy ở đây.",
     experienceData: [
         { 
             role: 'BIÊN TẬP VIÊN VIDEO/TIN TỨC',
             company: 'TB Group (Hà Nội, Việt Nam)',
             period: 'Thg 7 2023 – Thg 1 2024',
             achievements: [
-                'Chỉnh sửa hơn 400 bài viết trong 6 tháng, nâng cao chất lượng và độ rõ ràng của nội dung.',
-                'Viết hơn 1.000 bài viết về tiền điện tử và công nghệ, tăng cường sự tương tác và kiến thức của người đọc.',
-                'Tạo hướng dẫn nội bộ trên Canva, thúc đẩy sự hợp tác và phát triển kỹ năng của nhóm.',
-                'Thực hiện các cuộc phỏng vấn với các nhà lãnh đạo ngành, làm phong phú chất lượng nội dung và hiểu biết thị trường.',
+                'Biên tập hơn 400 bài viết trong 6 tháng, nâng cao chất lượng và độ rõ ràng của nội dung.',
+                'Phát triển kỹ năng viết và biên tập vững vàng qua nhiều chủ đề bài viết đa dạng.',
+                'Tham gia các hoạt động nhóm, thúc đẩy tinh thần hợp tác và giao tiếp.',
+                'Cải thiện phát triển cá nhân thông qua việc tham gia các hoạt động ngoại khóa.',
+                'Đóng góp vào thành công của nhóm bằng các chiến lược biên tập và nội dung hiệu quả.',
             ]
         },
         { 
@@ -346,10 +356,10 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
             company: 'Cryptoday (Hà Nội, Việt Nam)',
             period: 'Thg 6 2022 – Thg 5 2023',
             achievements: [
-                 'Dẫn dắt đội ngũ truyền thông sản xuất 52 video về tiền điện tử, nâng cao độ rõ ràng và cách truyền tải nội dung.',
-                 'Theo dõi các ấn phẩm hàng đầu về tiền điện tử để phân tích xu hướng, đảm bảo báo cáo luôn cập nhật.',
-                 'Chỉ đạo việc tạo các video hướng dẫn, cải thiện đáng kể sự tương tác của khán giả.',
-                 'Quản lý sản xuất video, đảm bảo hoàn thành đúng thời hạn và giao tiếp rõ ràng.',
+                'Viết hơn 1.000 bài báo về tiền điện tử và công nghệ, nâng cao sự tương tác và kiến thức của người đọc.',
+                'Tạo các hướng dẫn nội bộ trên Canva, thúc đẩy sự hợp tác và phát triển kỹ năng trong nhóm.',
+                'Thực hiện các cuộc phỏng vấn với các nhà lãnh đạo ngành, làm phong phú chất lượng nội dung và hiểu biết về thị trường.',
+                'Theo dõi các ấn phẩm hàng đầu về tiền điện tử để phân tích xu hướng, đảm bảo báo cáo luôn cập nhật.',
             ]
         },
         { 
@@ -357,8 +367,9 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
             company: 'ECI HOLDINGS JOINT STOCK COMPANY (Hà Nội, Việt Nam)',
             period: 'Thg 2 2022 – Thg 4 2022',
             achievements: [
-                'Dẫn dắt các dự án chỉnh sửa video từ kịch bản phân cảnh đến định dạng cuối cùng.',
-                'Phát triển các ý tưởng sáng tạo và câu chuyện video hấp dẫn.'
+                'Dẫn dắt đội ngũ media sản xuất 52 video về tiền điện tử, nâng cao độ rõ ràng và cách thức truyền tải nội dung.',
+                'Quản lý sản xuất video, đảm bảo hoàn thành đúng thời hạn và giao tiếp rõ ràng.',
+                'Chỉ đạo việc tạo các video hướng dẫn, cải thiện đáng kể sự tương tác của khán giả.',
             ]
         },
         { 
@@ -366,9 +377,11 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
             company: 'Lotus Media (Hà Nội, Việt Nam)',
             period: 'Thg 10 2018 – Thg 1 2022',
             achievements: [
-                 'Tăng số lượng người đăng ký YouTube từ 1.000 lên 72.000.',
-                 'Quản lý nhiều kênh, tăng cường tương tác của khán giả.',
-                 'Giám sát hậu kỳ, đảm bảo chất lượng và tính liên tục.'
+                'Dẫn dắt các dự án chỉnh sửa video từ kịch bản phân cảnh đến định dạng cuối cùng.',
+                'Tăng số lượng người đăng ký YouTube từ 1.000 lên 72.000.',
+                'Quản lý nhiều kênh, tăng cường tương tác của khán giả.',
+                'Giám sát hậu kỳ, đảm bảo chất lượng và tính liên tục.',
+                'Phát triển các ý tưởng sáng tạo và câu chuyện video hấp dẫn.',
             ]
         },
         { 
@@ -376,9 +389,9 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
             company: 'Pinetree Securities (Hà Nội, Việt Nam)',
             period: 'Thg 12 2020 – Thg 4 2021',
             achievements: [
-                'Áp dụng phụ đề và hiệu ứng để nâng cao chất lượng video trên YouTube, đảm bảo hoàn thành công việc đúng hạn.',
+                'Áp dụng phụ đề và hiệu ứng để nâng cao video YouTube, đảm bảo hoàn thành công việc đúng hạn.',
+                'Quản lý thời hạn và giao tiếp, góp phần vào quy trình sản xuất liền mạch.',
                 'Cải thiện chất lượng video thông qua chỉnh màu, nhận được phản hồi tích cực từ người xem.',
-                'Quản lý thời hạn và giao tiếp, góp phần vào quy trình sản xuất liền mạch.'
             ]
         },
     ],
@@ -389,6 +402,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         { name: 'AI Audio Studio', description: 'Tạo, chỉnh sửa và nâng cao âm thanh bằng AI.', link: 'https://mrluke1618.github.io/ai-audio-studio' },
         { name: 'IELTS Practice Pod', description: 'Luyện tập cả 4 kỹ năng IELTS với sự hỗ trợ của AI.', link: 'https://mrluke1618.github.io/ielts-practice-app' },
         { name: 'Creator’s Toolbox', description: 'Bộ công cụ dành cho người sáng tạo và biên tập viên.', link: 'https://mrluke1618.github.io/mrluke1818-creators-toolbox' },
+        { name: 'Shopify Growth Video Idea Generator', description: 'Tạo ý tưởng video mục tiêu để thúc đẩy tăng trưởng cửa hàng Shopify.', link: 'https://mrluke1618.github.io/shopify-growth-video-idea-generator-v2/' },
         { name: 'Kokoro English Guide', description: 'Hướng dẫn học tiếng Anh tương tác.', link: 'https://mrluke1618.github.io/Kokoro-English-Guide/preloader.html' },
     ],
     educationData: [
@@ -522,7 +536,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         toolboxContent: {
             heading: "Demo Hộp công cụ AI là gì?",
             p1: "Hộp công cụ AI là một bộ sưu tập tương tác các ứng dụng nhỏ do AI cung cấp mà tôi đã xây dựng. Mỗi công cụ được thiết kế để giải quyết một vấn đề cụ thể cho một đối tượng cụ thể, từ người tạo nội dung và dịch giả đến game thủ.",
-            p2: "Những bản demo này thể hiện khả năng của tôi trong việc tận dụng Gemini API để tạo ra các giải pháp thực tế và sáng tạo. Hãy thoải mái thử nghiệm chúng! Tất cả đều hoạt động đầy đủ."
+            p2: "Những bản demo này thể hiện khả năng của tôi trong việc tận dụng Gemini API để tạo ra các giải pháp thực tế và sáng tạo. Hãy thoải mái thử nghiệm chúng! Tất cả đều hoạt động đầy đủ nếu bạn cung cấp khóa API."
         },
         faqs: [
             {
@@ -547,7 +561,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
             },
             {
                 question: "Các công cụ AI trong hộp công cụ có hoạt động không?",
-                answer: "Chắc chắn rồi! Mọi công cụ trong Demo Hộp công cụ AI đều là các ứng dụng nhỏ hoạt động đầy đủ, được xây dựng để thể hiện kỹ năng của tôi với Gemini API. Bạn cứ tự nhiên sử dụng nhé."
+                answer: "Chắc chắn rồi! Mọi công cụ trong Demo Hộp công cụ AI đều là các ứng dụng nhỏ hoạt động đầy đủ. Để sử dụng chúng trên trang web này, bạn cần cung cấp Khóa API Google AI Studio của riêng mình trong tab 'Khóa API' dưới mục 'Trợ giúp & Hỗ trợ'."
             },
             {
                 question: "Làm thế nào để liên lạc với bạn?",
@@ -565,7 +579,25 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
                 question: "Trang web portfolio này được xây dựng bằng gì?",
                 answer: "Đây là một portfolio tương tác được xây dựng tùy chỉnh bằng React, TypeScript, và Tailwind CSS, được cung cấp bởi Google Gemini API cho các tính năng AI của nó."
             }
-        ]
+        ],
+        apiKeySetup: {
+            title: "Khóa API",
+            heading: "Cài đặt Khóa API của bạn",
+            p1: "Để kích hoạt các tính năng AI trên bản demo này, bạn cần cung cấp khóa API Google AI Studio của riêng mình.",
+            p2: "Khóa của bạn được lưu trữ an toàn trong bộ nhớ cục bộ của trình duyệt và không bao giờ được gửi đến bất kỳ máy chủ nào ngoài Google. Bạn có thể nhận khóa miễn phí của riêng mình từ",
+            linkText: "Google AI Studio",
+            inputLabel: "Khóa API Google AI Studio của bạn",
+            inputPlaceholder: "Dán khóa API của bạn vào đây",
+            saveButton: "Lưu khóa",
+            clearButton: "Xóa khóa",
+            statusSet: "Khóa API đã được thiết lập và đang hoạt động.",
+            statusNotSet: "Không tìm thấy khóa API.",
+            disabledTitle: "Tính năng AI đã bị vô hiệu hóa",
+            disabledMessage: "Để sử dụng công cụ này, vui lòng thiết lập khóa API Google AI Studio của bạn trong phần 'Trợ giúp & Hỗ trợ'.",
+            disabledMessageChat: "Trợ lý AI hiện đang ngoại tuyến. Để bật nó, vui lòng cung cấp khóa API Google AI Studio của riêng bạn trong tab 'Khóa API' trong phần 'Trợ giúp & Hỗ trợ'.",
+            disabledPlaceholder: "Cài đặt Khóa API để bật chat...",
+            buttonText: "Đi đến Cài đặt Khóa API"
+        }
     }
   }
 };

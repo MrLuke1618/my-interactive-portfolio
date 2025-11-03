@@ -1,10 +1,10 @@
 
 
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { i18n } from './constants';
-import { type Language, type NavigationItem, type Project, type Experience, type EducationItem, type Skill, type Link as LinkType, type ToolStrings, type ChatMessage, HelpAndSupportStrings } from './types';
-import { ArrowUpRight, Copy, ThumbsUp, ChevronLeft, ChevronRight, BrainCircuit, ArrowUp, Send } from 'lucide-react';
-import { getChatbotResponse, generateYoutubeTitles, countWordsInScript, generateHeadlines, explainIdiom, generateClanNames } from './services/geminiService';
+import { type Language, type NavigationItem, type Project, type Experience, type EducationItem, type Skill, type Link as LinkType, type ToolStrings, type ChatMessage, HelpAndSupportStrings, NavigationLink } from './types';
+import { ArrowUpRight, Copy, ThumbsUp, ChevronLeft, ChevronRight, BrainCircuit, ArrowUp, Send, AlertTriangle } from 'lucide-react';
+import { initializeAi, getChatbotResponse, generateYoutubeTitles, countWordsInScript, generateHeadlines, explainIdiom, generateClanNames } from './services/geminiService';
 import ChatBubble from './components/ChatBubble';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -144,21 +144,47 @@ const BackToTopButton: React.FC<{ show: boolean; onClick: () => void; }> = ({ sh
     );
 };
 
+const DisabledToolView: React.FC<{ strings: HelpAndSupportStrings['apiKeySetup']; setActiveSection: (id: string) => void; }> = ({ strings, setActiveSection }) => (
+    <Card>
+        <div className="text-center">
+            <AlertTriangle className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-text-primary mb-2">{strings.disabledTitle}</h3>
+            <p className="text-text-secondary mb-6">{strings.disabledMessage}</p>
+            <button
+                onClick={() => setActiveSection('help-and-support')}
+                className="bg-brand-purple text-white font-semibold px-6 py-3 rounded-md hover:bg-purple-700 transition-colors"
+            >
+                {strings.buttonText}
+            </button>
+        </div>
+    </Card>
+);
+
+
 // --- Section Views ---
 
-const SummaryView: React.FC<{ title: string; summaryText: string; keyStats: { value: string; label: string }[] }> = ({ title, summaryText, keyStats }) => (
+const SummaryView: React.FC<{ 
+    title: string; 
+    summaryText: string; 
+    dashboardItems: NavigationLink[]; 
+    setActiveSection: (id: string) => void; 
+}> = ({ title, summaryText, dashboardItems, setActiveSection }) => (
     <>
         <SectionTitle>{title}</SectionTitle>
         <div className="space-y-8">
             <Card>
                 <p className="text-text-secondary leading-relaxed whitespace-pre-line">{summaryText}</p>
             </Card>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-center">
-                {keyStats.map(stat => (
-                    <div key={stat.label} className="bg-card-bg border border-border-color rounded-lg p-4">
-                        <p className="text-2xl font-bold text-brand-purple">{stat.value}</p>
-                        <p className="text-xs text-text-secondary mt-1">{stat.label}</p>
-                    </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {dashboardItems.map(item => (
+                    <button
+                        key={item.id}
+                        onClick={() => setActiveSection(item.id)}
+                        className="group bg-card-bg border border-border-color rounded-lg p-4 text-center transition-all hover:border-brand-purple hover:shadow-md hover:shadow-brand-purple/10"
+                    >
+                        <item.icon className="w-8 h-8 mx-auto text-text-secondary group-hover:text-brand-purple transition-colors mb-2" />
+                        <p className="text-sm font-semibold text-text-primary">{item.title}</p>
+                    </button>
                 ))}
             </div>
         </div>
@@ -310,7 +336,7 @@ const AIReasoning: React.FC<{ reasoning: string, label: string }> = ({ reasoning
 );
 
 
-const YouTubeTitleGeneratorView: React.FC<{ title: string; language: Language; strings: ToolStrings['youtubeTitleGenerator'] }> = ({ title, language, strings }) => {
+const YouTubeTitleGeneratorView: React.FC<{ title: string; language: Language; strings: ToolStrings['youtubeTitleGenerator']; isApiKeySet: boolean; disabledStrings: HelpAndSupportStrings['apiKeySetup']; setActiveSection: (id: string) => void; }> = ({ title, language, strings, isApiKeySet, disabledStrings, setActiveSection }) => {
     const [topic, setTopic] = useState('');
     const [tone, setTone] = useState('Professional');
     const [titles, setTitles] = useState<{ title: string; reasoning: string }[]>([]);
@@ -335,6 +361,15 @@ const YouTubeTitleGeneratorView: React.FC<{ title: string; language: Language; s
             setIsLoading(false);
         }
     };
+
+    if (!isApiKeySet) {
+        return (
+            <>
+                <SectionTitle>{title}</SectionTitle>
+                <DisabledToolView strings={disabledStrings} setActiveSection={setActiveSection} />
+            </>
+        );
+    }
 
     return (
         <>
@@ -368,7 +403,9 @@ const YouTubeTitleGeneratorView: React.FC<{ title: string; language: Language; s
                             ))}
                         </select>
                     </div>
-                    <GenerateButton isLoading={isLoading} onClick={handleGenerate} text={strings.buttonText} loadingText={loadingMessage} />
+                    <div className="flex justify-center">
+                        <GenerateButton isLoading={isLoading} onClick={handleGenerate} text={strings.buttonText} loadingText={loadingMessage} />
+                    </div>
                     {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
                 </div>
             </Card>
@@ -393,7 +430,7 @@ const YouTubeTitleGeneratorView: React.FC<{ title: string; language: Language; s
     );
 };
 
-const ScriptTimerView: React.FC<{ title: string; language: Language; strings: ToolStrings['scriptTimer'] }> = ({ title, language, strings }) => {
+const ScriptTimerView: React.FC<{ title: string; language: Language; strings: ToolStrings['scriptTimer']; isApiKeySet: boolean; disabledStrings: HelpAndSupportStrings['apiKeySetup']; setActiveSection: (id: string) => void; }> = ({ title, language, strings, isApiKeySet, disabledStrings, setActiveSection }) => {
     const [script, setScript] = useState('');
     const [wpm, setWpm] = useState(150);
     const [result, setResult] = useState<{ estimatedTime: string; wordCount: number } | null>(null);
@@ -438,7 +475,16 @@ const ScriptTimerView: React.FC<{ title: string; language: Language; strings: To
                 estimatedTime: formatTime(totalSeconds),
             });
         }
-    }, [wpm, result?.wordCount]);
+    }, [wpm, result?.wordCount, strings]);
+
+    if (!isApiKeySet) {
+        return (
+            <>
+                <SectionTitle>{title}</SectionTitle>
+                <DisabledToolView strings={disabledStrings} setActiveSection={setActiveSection} />
+            </>
+        );
+    }
 
     return (
         <>
@@ -499,7 +545,7 @@ const ScriptTimerView: React.FC<{ title: string; language: Language; strings: To
     );
 };
 
-const HeadlineGeneratorView: React.FC<{ title: string; language: Language; strings: ToolStrings['headlineGenerator'] }> = ({ title, language, strings }) => {
+const HeadlineGeneratorView: React.FC<{ title: string; language: Language; strings: ToolStrings['headlineGenerator']; isApiKeySet: boolean; disabledStrings: HelpAndSupportStrings['apiKeySetup']; setActiveSection: (id: string) => void; }> = ({ title, language, strings, isApiKeySet, disabledStrings, setActiveSection }) => {
     const [topic, setTopic] = useState('');
     const [audience, setAudience] = useState('');
     const [headlines, setHeadlines] = useState<{ headline: string; reasoning: string }[]>([]);
@@ -524,6 +570,15 @@ const HeadlineGeneratorView: React.FC<{ title: string; language: Language; strin
             setIsLoading(false);
         }
     };
+
+    if (!isApiKeySet) {
+        return (
+            <>
+                <SectionTitle>{title}</SectionTitle>
+                <DisabledToolView strings={disabledStrings} setActiveSection={setActiveSection} />
+            </>
+        );
+    }
     
     return (
         <>
@@ -582,7 +637,7 @@ const HeadlineGeneratorView: React.FC<{ title: string; language: Language; strin
     );
 };
 
-const IdiomExplainerView: React.FC<{ title: string; language: Language; strings: ToolStrings['idiomExplainer'] }> = ({ title, language, strings }) => {
+const IdiomExplainerView: React.FC<{ title: string; language: Language; strings: ToolStrings['idiomExplainer']; isApiKeySet: boolean; disabledStrings: HelpAndSupportStrings['apiKeySetup']; setActiveSection: (id: string) => void; }> = ({ title, language, strings, isApiKeySet, disabledStrings, setActiveSection }) => {
     const [idiom, setIdiom] = useState('');
     const [result, setResult] = useState<{ explanation: string; dialogue: string; equivalent: string; dialogueReasoning: string; } | null>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -606,6 +661,15 @@ const IdiomExplainerView: React.FC<{ title: string; language: Language; strings:
             setIsLoading(false);
         }
     };
+
+     if (!isApiKeySet) {
+        return (
+            <>
+                <SectionTitle>{title}</SectionTitle>
+                <DisabledToolView strings={disabledStrings} setActiveSection={setActiveSection} />
+            </>
+        );
+    }
 
     return (
         <>
@@ -658,7 +722,7 @@ const IdiomExplainerView: React.FC<{ title: string; language: Language; strings:
     );
 };
 
-const ClanNameGeneratorView: React.FC<{ title: string; language: Language; strings: ToolStrings['clanNameGenerator'] }> = ({ title, language, strings }) => {
+const ClanNameGeneratorView: React.FC<{ title: string; language: Language; strings: ToolStrings['clanNameGenerator']; isApiKeySet: boolean; disabledStrings: HelpAndSupportStrings['apiKeySetup']; setActiveSection: (id: string) => void; }> = ({ title, language, strings, isApiKeySet, disabledStrings, setActiveSection }) => {
     const [theme, setTheme] = useState('');
     const [count, setCount] = useState(10);
     const [names, setNames] = useState<{ name: string; reasoning: string }[]>([]);
@@ -688,6 +752,15 @@ const ClanNameGeneratorView: React.FC<{ title: string; language: Language; strin
     
     const handlePrev = () => setCurrentIndex(prev => (prev === 0 ? names.length - 1 : prev - 1));
     const handleNext = () => setCurrentIndex(prev => (prev === names.length - 1 ? 0 : prev + 1));
+
+    if (!isApiKeySet) {
+        return (
+            <>
+                <SectionTitle>{title}</SectionTitle>
+                <DisabledToolView strings={disabledStrings} setActiveSection={setActiveSection} />
+            </>
+        );
+    }
 
     return (
         <>
@@ -756,7 +829,7 @@ const ClanNameGeneratorView: React.FC<{ title: string; language: Language; strin
 
 // --- Help & Support Views ---
 
-const ChatAssistant: React.FC<{ onThemeChange: (theme: 'default' | 'synthwave') => void; strings: ToolStrings['chat'], faqs: HelpAndSupportStrings['faqs'] }> = ({ onThemeChange, strings, faqs }) => {
+const ChatAssistant: React.FC<{ onThemeChange: (theme: 'default' | 'synthwave') => void; strings: ToolStrings['chat'], faqs: HelpAndSupportStrings['faqs']; isApiKeySet: boolean; disabledStrings: HelpAndSupportStrings['apiKeySetup']; setActiveSection: (id: string) => void; }> = ({ onThemeChange, strings, faqs, isApiKeySet, disabledStrings }) => {
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [userInput, setUserInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -769,6 +842,13 @@ const ChatAssistant: React.FC<{ onThemeChange: (theme: 'default' | 'synthwave') 
         chatHistoryRef.current?.scrollTo({ top: chatHistoryRef.current.scrollHeight, behavior: 'smooth' });
     }, [messages]);
 
+    useEffect(() => {
+        if (!isApiKeySet && messages.length === 0) {
+            setMessages([{ role: 'model', text: disabledStrings.disabledMessageChat }]);
+        }
+    }, [isApiKeySet, messages.length, disabledStrings]);
+
+
     const handleFaqNav = (direction: 'prev' | 'next') => {
         if (direction === 'prev') {
             setFaqIndex(prev => (prev === 0 ? faqs.length - 1 : prev - 1));
@@ -779,7 +859,7 @@ const ChatAssistant: React.FC<{ onThemeChange: (theme: 'default' | 'synthwave') 
     
     const handleSendMessage = async (prefilledMessage?: string) => {
         const trimmedInput = (prefilledMessage || userInput).trim();
-        if (!trimmedInput || isLoading) return;
+        if (!trimmedInput || isLoading || !isApiKeySet) return;
         
         setShowFAQs(false);
 
@@ -827,14 +907,14 @@ const ChatAssistant: React.FC<{ onThemeChange: (theme: 'default' | 'synthwave') 
                          </div>
                          <div className="mt-4 flex items-center justify-center gap-4">
                             <button onClick={() => handleFaqNav('prev')} className="p-1 rounded-full hover:bg-border-color text-text-secondary"><ChevronLeft className="w-5 h-5"/></button>
-                            <button onClick={() => handleSendMessage(faqs[faqIndex].question)} className="text-sm text-brand-purple hover:underline">{strings.askThisQuestion}</button>
+                            <button onClick={() => handleSendMessage(faqs[faqIndex].question)} className="text-sm text-brand-purple hover:underline" disabled={!isApiKeySet}>{strings.askThisQuestion}</button>
                             <button onClick={() => handleFaqNav('next')} className="p-1 rounded-full hover:bg-border-color text-text-secondary"><ChevronRight className="w-5 h-5"/></button>
                          </div>
                     </div>
                 )}
                 
                 {messages.map((msg, index) => <ChatBubble key={index} message={msg} />)}
-                 {isLoading && <div className="flex justify-center"><div className="w-3 h-3 bg-brand-purple rounded-full animate-bounce"></div></div>}
+                 {isLoading && isApiKeySet && <div className="flex justify-center"><div className="w-3 h-3 bg-brand-purple rounded-full animate-bounce"></div></div>}
             </div>
             <div className="mt-4 pt-4 border-t border-border-color">
                 <div className="flex items-center gap-2">
@@ -843,13 +923,13 @@ const ChatAssistant: React.FC<{ onThemeChange: (theme: 'default' | 'synthwave') 
                         value={userInput}
                         onChange={e => setUserInput(e.target.value)}
                         onKeyPress={e => e.key === 'Enter' && handleSendMessage()}
-                        placeholder={strings.placeholder}
+                        placeholder={isApiKeySet ? strings.placeholder : disabledStrings.disabledPlaceholder}
                         className="w-full bg-dark-bg border border-border-color rounded-md p-3 text-text-primary focus:ring-2 focus:ring-brand-purple focus:border-brand-purple transition"
-                        disabled={isLoading}
+                        disabled={isLoading || !isApiKeySet}
                     />
                     <button
                         onClick={() => handleSendMessage()}
-                        disabled={isLoading || !userInput.trim()}
+                        disabled={isLoading || !userInput.trim() || !isApiKeySet}
                         className="p-3 bg-brand-purple text-white rounded-md hover:bg-purple-700 transition-colors disabled:bg-gray-500 disabled:cursor-not-allowed"
                         aria-label={strings.buttonText}
                     >
@@ -862,8 +942,23 @@ const ChatAssistant: React.FC<{ onThemeChange: (theme: 'default' | 'synthwave') 
 };
 
 
-const HelpAndSupportView: React.FC<{ title: string; onThemeChange: (theme: 'default' | 'synthwave') => void; strings: HelpAndSupportStrings; chatStrings: ToolStrings['chat'] }> = ({ title, onThemeChange, strings, chatStrings }) => {
+const HelpAndSupportView: React.FC<{ title: string; onThemeChange: (theme: 'default' | 'synthwave') => void; strings: HelpAndSupportStrings; chatStrings: ToolStrings['chat']; onApiKeyUpdate: (key: string | null) => void; isApiKeySet: boolean; }> = ({ title, onThemeChange, strings, chatStrings, onApiKeyUpdate, isApiKeySet }) => {
     const [activeTab, setActiveTab] = useState('guide');
+    const [apiKeyValue, setApiKeyValue] = useState('');
+    const [saveMessage, setSaveMessage] = useState('');
+    
+    const handleSaveKey = () => {
+        onApiKeyUpdate(apiKeyValue);
+        setSaveMessage('API Key saved successfully!');
+        setTimeout(() => setSaveMessage(''), 3000);
+    };
+
+    const handleClearKey = () => {
+        onApiKeyUpdate(null);
+        setApiKeyValue('');
+        setSaveMessage('API Key cleared.');
+        setTimeout(() => setSaveMessage(''), 3000);
+    };
     
     return (
         <>
@@ -880,6 +975,12 @@ const HelpAndSupportView: React.FC<{ title: string; onThemeChange: (theme: 'defa
                     className={`px-4 py-2 text-sm font-medium transition-colors ${activeTab === 'chat' ? 'text-brand-purple border-b-2 border-brand-purple' : 'text-text-secondary hover:text-text-primary'}`}
                 >
                     {strings.chatTitle}
+                </button>
+                <button 
+                    onClick={() => setActiveTab('api')} 
+                    className={`px-4 py-2 text-sm font-medium transition-colors ${activeTab === 'api' ? 'text-brand-purple border-b-2 border-brand-purple' : 'text-text-secondary hover:text-text-primary'}`}
+                >
+                    {strings.apiKeySetup.title}
                 </button>
             </div>
             
@@ -898,7 +999,49 @@ const HelpAndSupportView: React.FC<{ title: string; onThemeChange: (theme: 'defa
                 </div>
             )}
 
-            {activeTab === 'chat' && <ChatAssistant onThemeChange={onThemeChange} strings={chatStrings} faqs={strings.faqs} />}
+            {activeTab === 'chat' && <ChatAssistant onThemeChange={onThemeChange} strings={chatStrings} faqs={strings.faqs} isApiKeySet={isApiKeySet} disabledStrings={strings.apiKeySetup} setActiveSection={() => {}} />}
+            
+            {activeTab === 'api' && (
+                 <Card>
+                    <h3 className="font-bold text-text-primary mb-2">{strings.apiKeySetup.heading}</h3>
+                    <p className="text-sm text-text-secondary mb-3">{strings.apiKeySetup.p1}</p>
+                    <p className="text-sm text-text-secondary mb-4">
+                        {strings.apiKeySetup.p2}
+                        <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" className="font-semibold underline text-brand-purple hover:text-purple-400 ml-1">
+                           {strings.apiKeySetup.linkText}
+                        </a>.
+                    </p>
+                    <div className="space-y-4">
+                         <div>
+                            <label htmlFor="api-key-input" className="block text-sm font-medium text-text-primary mb-1">{strings.apiKeySetup.inputLabel}</label>
+                            <input
+                                id="api-key-input"
+                                type="password"
+                                value={apiKeyValue}
+                                onChange={(e) => setApiKeyValue(e.target.value)}
+                                placeholder={strings.apiKeySetup.inputPlaceholder}
+                                className="w-full bg-dark-bg border border-border-color rounded-md p-3 text-text-primary focus:ring-2 focus:ring-brand-purple focus:border-brand-purple transition"
+                            />
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-4">
+                             <button onClick={handleSaveKey} className="flex-1 bg-brand-purple text-white font-semibold px-6 py-3 rounded-md hover:bg-purple-700 transition-colors disabled:opacity-50" disabled={!apiKeyValue}>
+                                {strings.apiKeySetup.saveButton}
+                             </button>
+                             <button onClick={handleClearKey} className="flex-1 bg-border-color text-text-primary font-semibold px-6 py-3 rounded-md hover:bg-red-500/50 transition-colors">
+                                {strings.apiKeySetup.clearButton}
+                             </button>
+                        </div>
+                        <p className="text-sm text-center">
+                            Current Status: 
+                            <span className={`font-semibold ml-1 ${isApiKeySet ? 'text-green-400' : 'text-yellow-400'}`}>
+                                {isApiKeySet ? strings.apiKeySetup.statusSet : strings.apiKeySetup.statusNotSet}
+                            </span>
+                        </p>
+                        {saveMessage && <p className="text-sm text-center text-brand-purple">{saveMessage}</p>}
+                    </div>
+                </Card>
+            )}
+
         </>
     );
 };
@@ -910,6 +1053,7 @@ const App: React.FC = () => {
     const [language, setLanguage] = useState<Language>('en');
     const [theme, setTheme] = useState<'default' | 'synthwave'>('default');
     const [showScroll, setShowScroll] = useState(false);
+    const [isApiKeySet, setIsApiKeySet] = useState(false);
     
     const data = i18n[language];
     
@@ -923,6 +1067,32 @@ const App: React.FC = () => {
     };
 
     const [activeSection, setActiveSection] = useState<string>(getFirstSectionId(data.navigation));
+
+    // Initialize AI service on first load
+    useEffect(() => {
+        const storedKey = localStorage.getItem('user-gemini-api-key');
+        if (storedKey) {
+            initializeAi(storedKey);
+            setIsApiKeySet(true);
+        } else if (process.env.API_KEY) { // Fallback for local dev
+            initializeAi(process.env.API_KEY);
+            setIsApiKeySet(true);
+        } else {
+            setIsApiKeySet(false);
+        }
+    }, []);
+
+    const handleApiKeyUpdate = (key: string | null) => {
+        if (key) {
+            localStorage.setItem('user-gemini-api-key', key);
+            initializeAi(key);
+            setIsApiKeySet(true);
+        } else {
+            localStorage.removeItem('user-gemini-api-key');
+            initializeAi(''); // De-initialize
+            setIsApiKeySet(false);
+        }
+    };
 
     useEffect(() => {
         const sectionExists = data.navigation.some(item => item.type === 'link' && item.id === activeSection);
@@ -949,19 +1119,30 @@ const App: React.FC = () => {
     }, [showScroll]);
 
     const renderContent = () => {
+        const aiToolProps = { isApiKeySet, disabledStrings: data.helpAndSupport.apiKeySetup, setActiveSection };
         switch (activeSection) {
-            case 'summary': return <SummaryView title={data.viewTitles.summary} summaryText={data.summaryText} keyStats={data.keyStats} />;
+            case 'summary': {
+                const dashboardItems = data.navigation.filter(
+                    item => item.type === 'link' && ['experience', 'projects', 'education', 'skills'].includes(item.id)
+                ) as NavigationLink[];
+                return <SummaryView 
+                    title={data.viewTitles.summary} 
+                    summaryText={data.summaryText} 
+                    dashboardItems={dashboardItems} 
+                    setActiveSection={setActiveSection}
+                />;
+            }
             case 'experience': return <ExperienceView title={data.viewTitles.experience} experienceData={data.experienceData} />;
             case 'projects': return <ProjectsView title={data.viewTitles.projects} projectsData={data.projectsData} />;
             case 'education': return <EducationView title={data.viewTitles.education} educationData={data.educationData} />;
             case 'skills': return <SkillsView title={data.viewTitles.skills} skillsData={data.skillsData} />;
             case 'links': return <LinksView title={data.viewTitles.links} linksData={data.linksData} />;
-            case 'youtube-title-generator': return <YouTubeTitleGeneratorView title={data.viewTitles.youtubeTitleGenerator} language={language} strings={data.toolStrings.youtubeTitleGenerator} />;
-            case 'script-timer': return <ScriptTimerView title={data.viewTitles.scriptTimer} language={language} strings={data.toolStrings.scriptTimer} />;
-            case 'headline-generator': return <HeadlineGeneratorView title={data.viewTitles.headlineGenerator} language={language} strings={data.toolStrings.headlineGenerator} />;
-            case 'idiom-explainer': return <IdiomExplainerView title={data.viewTitles.idiomExplainer} language={language} strings={data.toolStrings.idiomExplainer} />;
-            case 'clan-name-generator': return <ClanNameGeneratorView title={data.viewTitles.clanNameGenerator} language={language} strings={data.toolStrings.clanNameGenerator} />;
-            case 'help-and-support': return <HelpAndSupportView title={data.viewTitles.helpAndSupport} onThemeChange={setTheme} strings={data.helpAndSupport} chatStrings={data.toolStrings.chat} />;
+            case 'youtube-title-generator': return <YouTubeTitleGeneratorView title={data.viewTitles.youtubeTitleGenerator} language={language} strings={data.toolStrings.youtubeTitleGenerator} {...aiToolProps} />;
+            case 'script-timer': return <ScriptTimerView title={data.viewTitles.scriptTimer} language={language} strings={data.toolStrings.scriptTimer} {...aiToolProps} />;
+            case 'headline-generator': return <HeadlineGeneratorView title={data.viewTitles.headlineGenerator} language={language} strings={data.toolStrings.headlineGenerator} {...aiToolProps} />;
+            case 'idiom-explainer': return <IdiomExplainerView title={data.viewTitles.idiomExplainer} language={language} strings={data.toolStrings.idiomExplainer} {...aiToolProps} />;
+            case 'clan-name-generator': return <ClanNameGeneratorView title={data.viewTitles.clanNameGenerator} language={language} strings={data.toolStrings.clanNameGenerator} {...aiToolProps} />;
+            case 'help-and-support': return <HelpAndSupportView title={data.viewTitles.helpAndSupport} onThemeChange={setTheme} strings={data.helpAndSupport} chatStrings={data.toolStrings.chat} onApiKeyUpdate={handleApiKeyUpdate} isApiKeySet={isApiKeySet} />;
             default: return null;
         }
     };

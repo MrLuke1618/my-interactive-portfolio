@@ -39,14 +39,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         clanNameGenerator: 'AI Gaming Clan Name Generator',
         helpAndSupport: 'Help & Support',
     },
-    summaryText: "Video Editor and News Editor with over six years of experience in elevating content clarity and reader engagement across multiple platforms. Experienced in video editing, Figma, and Canva, with a history of producing impactful cryptocurrency videos and authoring over 1,000 articles. Passionate about leveraging skills in social media management and software development to pioneer innovative content strategies, drive audience interaction, and develop powerful AI tools for the future.",
-    keyStats: [
-      { value: '6+', label: 'Years in Media' },
-      { value: '1,000+', label: 'Articles Written' },
-      { value: '400+', label: 'Articles Edited' },
-      { value: '52+', label: 'Videos Produced' },
-      { value: '8+', label: 'Apps Developed' },
-    ],
+    summaryText: "Hello, I'm Hoang. With over six years of experience as a Video and News Editor, I specialize in enhancing content clarity and engaging readers across multiple platforms. My expertise in video editing, Figma, and Canva has enabled me to produce impactful cryptocurrency videos and author over 1,000 articles. I'm passionate about merging my skills in social media and software development to pioneer innovative content strategies, drive audience interaction, and build the powerful AI tools you see here.",
     experienceData: [
         { 
             role: 'VIDEO EDITOR/NEWS EDITOR',
@@ -111,6 +104,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         { name: 'AI Audio Studio', description: 'Create, edit, and enhance audio with AI.', link: 'https://mrluke1618.github.io/ai-audio-studio' },
         { name: 'IELTS Practice Pod', description: 'AI-powered practice for all 4 IELTS skills.', link: 'https://mrluke1618.github.io/ielts-practice-app' },
         { name: 'Creator’s Toolbox', description: 'Toolkit for creators and editors.', link: 'https://mrluke1618.github.io/mrluke1818-creators-toolbox' },
+        { name: 'Shopify Growth Video Idea Generator', description: 'Generates targeted video ideas to boost Shopify store growth.', link: 'https://mrluke1618.github.io/shopify-growth-video-idea-generator-v2/' },
         { name: 'Kokoro English Guide', description: 'Interactive English learning guide.', link: 'https://mrluke1618.github.io/Kokoro-English-Guide/preloader.html' },
     ],
     educationData: [
@@ -239,17 +233,25 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         portfolioContent: {
             heading: "What is the Portfolio Section?",
             p1: "This section is a comprehensive showcase of my professional journey. It includes my resume, work experience, educational background, and a curated list of my key projects. It's designed to give you a quick yet detailed overview of my skills and accomplishments.",
-            p2: "You can navigate through different categories like Summary, Experience, and AI Projects using the sidebar to explore the areas that interest you most."
+            p2: "The summary section also features an interactive dashboard. Use it to quickly jump to key areas like my Experience, AI Projects, Education, and Skills."
         },
         toolboxContent: {
             heading: "What is the AI Toolbox Demo?",
             p1: "The AI Toolbox is an interactive collection of AI-powered mini-applications that I've built. Each tool is designed to solve a specific problem for a particular audience, from content creators and translators to gamers.",
-            p2: "These demos showcase my ability to leverage the Gemini API to create practical and creative solutions. Feel free to play around with them! They are all fully functional."
+            p2: "To try them out, just navigate to the 'API Key' tab in this section, enter your own free Google AI Studio API key, and all the tools will be activated. Your key is stored locally and securely in your browser."
         },
         faqs: [
             {
                 question: "Is there a hidden feature?",
                 answer: "There might be! I hear the AI assistant is a bit playful. Why not ask it to 'play a game' and see what happens?"
+            },
+            {
+                question: "What is the dashboard on the summary page?",
+                answer: "The dashboard is a set of quick navigation buttons designed to help you jump straight to the most important sections of my portfolio, like my Work Experience, AI Projects, and Skills, right from the summary page."
+            },
+            {
+                question: "Are the AI tools in the toolbox functional?",
+                answer: "Absolutely! All tools are fully functional. To activate them on this live portfolio, go to the **'API Key'** tab in this 'Help & Support' section and enter your own free Google AI Studio API key. It's saved locally in your browser."
             },
             {
                 question: "What are your key skills?",
@@ -268,10 +270,6 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
                 answer: "I have a Bachelor's in Information Technology and I'm currently pursuing a Master's in Communication and Media Studies at Dublin City University."
             },
             {
-                question: "Are the AI tools in the toolbox functional?",
-                answer: "Absolutely! Every tool in the AI Toolbox Demo is a fully functional mini-app built to showcase my skills with the Gemini API. Feel free to use them."
-            },
-            {
                 question: "How can I contact you?",
                 answer: "The best way to reach me professionally is through my [LinkedIn profile](https://www.linkedin.com/in/hoangminhcao)."
             },
@@ -287,7 +285,25 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
                 question: "What is this portfolio website built with?",
                 answer: "This is a custom-built interactive portfolio using React, TypeScript, and Tailwind CSS, powered by the Google Gemini API for its AI features."
             }
-        ]
+        ],
+        apiKeySetup: {
+            title: "API Key",
+            heading: "Set Your API Key",
+            p1: "To activate the AI features on this live demo, you need to provide your own Google AI Studio API key.",
+            p2: "Your key is saved securely in your browser's local storage and is never sent to any server but Google's. You can get your own free key from",
+            linkText: "Google AI Studio",
+            inputLabel: "Your Google AI Studio API Key",
+            inputPlaceholder: "Paste your API key here",
+            saveButton: "Save Key",
+            clearButton: "Clear Key",
+            statusSet: "API Key is set and active.",
+            statusNotSet: "API Key not found.",
+            disabledTitle: "AI Feature Disabled",
+            disabledMessage: "To use this tool, please set your Google AI Studio API key in the 'Help & Support' section.",
+            disabledMessageChat: "The AI assistant is currently offline. To enable it, please provide your own Google AI Studio API key in the 'API Key' tab within the 'Help & Support' section.",
+            disabledPlaceholder: "Set API Key to enable chat...",
+            buttonText: "Go to API Key Setup"
+        }
     }
   },
   vi: {
@@ -325,14 +341,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         clanNameGenerator: 'Công cụ tạo tên Clan Game bằng AI',
         helpAndSupport: 'Trợ giúp & Hỗ trợ',
     },
-    summaryText: "Biên tập viên Video và Tin tức với hơn sáu năm kinh nghiệm trong việc nâng cao sự rõ ràng của nội dung và sự tương tác của người đọc trên nhiều nền tảng. Có kinh nghiệm về chỉnh sửa video, Figma và Canva, với lịch sử sản xuất các video về tiền điện tử có ảnh hưởng và tác giả của hơn 1.000 bài viết. Đam mê tận dụng các kỹ năng quản lý mạng xã hội và phát triển phần mềm để đi tiên phong trong các chiến lược nội dung sáng tạo, thúc đẩy sự tương tác của khán giả và phát triển các công cụ AI mạnh mẽ cho tương lai.",
-    keyStats: [
-        { value: '6+', label: 'Năm trong ngành Truyền thông' },
-        { value: '1,000+', label: 'Bài viết đã xuất bản' },
-        { value: '400+', label: 'Bài viết đã chỉnh sửa' },
-        { value: '52+', label: 'Video đã sản xuất' },
-        { value: '8+', label: 'Ứng dụng đã phát triển' },
-    ],
+    summaryText: "Xin chào, tôi là Hoàng. Với hơn sáu năm kinh nghiệm làm Biên tập viên Video và Tin tức, tôi chuyên nâng cao sự rõ ràng của nội dung và thu hút người đọc trên nhiều nền tảng. Chuyên môn của tôi về chỉnh sửa video, Figma và Canva đã giúp tôi sản xuất các video về tiền điện tử có sức ảnh hưởng và viết hơn 1.000 bài báo. Tôi đam mê kết hợp các kỹ năng của mình trong quản lý mạng xã hội và phát triển phần mềm để đi tiên phong trong các chiến lược nội dung sáng tạo, thúc đẩy tương tác của khán giả và xây dựng các công cụ AI mạnh mẽ mà bạn thấy ở đây.",
     experienceData: [
         { 
             role: 'BIÊN TẬP VIÊN VIDEO/TIN TỨC',
@@ -397,6 +406,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         { name: 'AI Audio Studio', description: 'Tạo, chỉnh sửa và nâng cao âm thanh bằng AI.', link: 'https://mrluke1618.github.io/ai-audio-studio' },
         { name: 'IELTS Practice Pod', description: 'Luyện tập cả 4 kỹ năng IELTS với sự hỗ trợ của AI.', link: 'https://mrluke1618.github.io/ielts-practice-app' },
         { name: 'Creator’s Toolbox', description: 'Bộ công cụ dành cho người sáng tạo và biên tập viên.', link: 'https://mrluke1618.github.io/mrluke1818-creators-toolbox' },
+        { name: 'Shopify Growth Video Idea Generator', description: 'Tạo ý tưởng video mục tiêu để thúc đẩy tăng trưởng cửa hàng Shopify.', link: 'https://mrluke1618.github.io/shopify-growth-video-idea-generator-v2/' },
         { name: 'Kokoro English Guide', description: 'Hướng dẫn học tiếng Anh tương tác.', link: 'https://mrluke1618.github.io/Kokoro-English-Guide/preloader.html' },
     ],
     educationData: [
@@ -525,17 +535,25 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         portfolioContent: {
             heading: "Phần Portfolio là gì?",
             p1: "Phần này là một buổi giới thiệu toàn diện về hành trình chuyên nghiệp của tôi. Nó bao gồm sơ yếu lý lịch, kinh nghiệm làm việc, nền tảng giáo dục và danh sách các dự án chính của tôi. Nó được thiết kế để cung cấp cho bạn một cái nhìn tổng quan nhanh chóng nhưng chi tiết về các kỹ năng và thành tích của tôi.",
-            p2: "Bạn có thể điều hướng qua các danh mục khác nhau như Tóm tắt, Kinh nghiệm và Dự án AI bằng cách sử dụng thanh bên để khám phá các lĩnh vực mà bạn quan tâm nhất."
+            p2: "Phần tóm tắt cũng có một bảng điều khiển tương tác. Sử dụng nó để nhanh chóng chuyển đến các phần chính như Kinh nghiệm, Dự án AI, Học vấn và Kỹ năng của tôi."
         },
         toolboxContent: {
             heading: "Demo Hộp công cụ AI là gì?",
             p1: "Hộp công cụ AI là một bộ sưu tập tương tác các ứng dụng nhỏ do AI cung cấp mà tôi đã xây dựng. Mỗi công cụ được thiết kế để giải quyết một vấn đề cụ thể cho một đối tượng cụ thể, từ người tạo nội dung và dịch giả đến game thủ.",
-            p2: "Những bản demo này thể hiện khả năng của tôi trong việc tận dụng Gemini API để tạo ra các giải pháp thực tế và sáng tạo. Hãy thoải mái thử nghiệm chúng! Tất cả đều hoạt động đầy đủ."
+            p2: "Để thử chúng, chỉ cần điều hướng đến tab 'Khóa API' trong phần này, nhập khóa API Google AI Studio miễn phí của riêng bạn, và tất cả các công cụ sẽ được kích hoạt. Khóa của bạn được lưu trữ cục bộ và an toàn trong trình duyệt của bạn."
         },
         faqs: [
             {
                 question: "Có tính năng ẩn nào không?",
                 answer: "Có thể có đấy! Tôi nghe nói trợ lý AI này khá tinh nghịch. Tại sao bạn không thử yêu cầu nó 'chơi một trò chơi' xem sao?"
+            },
+            {
+                question: "Bảng điều khiển trên trang tóm tắt là gì?",
+                answer: "Bảng điều khiển là một bộ các nút điều hướng nhanh được thiết kế để giúp bạn chuyển thẳng đến các phần quan trọng nhất trong portfolio của tôi, như Kinh nghiệm làm việc, Dự án AI và Kỹ năng, ngay từ trang tóm tắt."
+            },
+            {
+                question: "Các công cụ AI trong hộp công cụ có hoạt động không?",
+                answer: "Chắc chắn rồi! Tất cả các công cụ đều hoạt động đầy đủ. Để kích hoạt chúng trên portfolio trực tiếp này, hãy vào tab **'Khóa API'** trong mục 'Trợ giúp & Hỗ trợ' này và nhập khóa API Google AI Studio miễn phí của riêng bạn. Khóa này sẽ được lưu cục bộ trong trình duyệt của bạn."
             },
             {
                 question: "Kỹ năng chính của bạn là gì?",
@@ -554,10 +572,6 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
                 answer: "Tôi có bằng Cử nhân Công nghệ Thông tin và hiện đang theo học Thạc sĩ ngành Nghiên cứu Truyền thông và Phương tiện tại Đại học Dublin City."
             },
             {
-                question: "Các công cụ AI trong hộp công cụ có hoạt động không?",
-                answer: "Chắc chắn rồi! Mọi công cụ trong Demo Hộp công cụ AI đều là các ứng dụng nhỏ hoạt động đầy đủ, được xây dựng để thể hiện kỹ năng của tôi với Gemini API. Bạn cứ tự nhiên sử dụng nhé."
-            },
-            {
                 question: "Làm thế nào để liên lạc với bạn?",
                 answer: "Cách tốt nhất để kết nối chuyên nghiệp với tôi là qua [hồ sơ LinkedIn](https://www.linkedin.com/in/hoangminhcao)."
             },
@@ -573,7 +587,25 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
                 question: "Trang web portfolio này được xây dựng bằng gì?",
                 answer: "Đây là một portfolio tương tác được xây dựng tùy chỉnh bằng React, TypeScript, và Tailwind CSS, được cung cấp bởi Google Gemini API cho các tính năng AI của nó."
             }
-        ]
+        ],
+        apiKeySetup: {
+            title: "Khóa API",
+            heading: "Cài đặt Khóa API của bạn",
+            p1: "Để kích hoạt các tính năng AI trên bản demo này, bạn cần cung cấp khóa API Google AI Studio của riêng mình.",
+            p2: "Khóa của bạn được lưu trữ an toàn trong bộ nhớ cục bộ của trình duyệt và không bao giờ được gửi đến bất kỳ máy chủ nào ngoài Google. Bạn có thể nhận khóa miễn phí của riêng mình từ",
+            linkText: "Google AI Studio",
+            inputLabel: "Khóa API Google AI Studio của bạn",
+            inputPlaceholder: "Dán khóa API của bạn vào đây",
+            saveButton: "Lưu khóa",
+            clearButton: "Xóa khóa",
+            statusSet: "Khóa API đã được thiết lập và đang hoạt động.",
+            statusNotSet: "Không tìm thấy khóa API.",
+            disabledTitle: "Tính năng AI đã bị vô hiệu hóa",
+            disabledMessage: "Để sử dụng công cụ này, vui lòng thiết lập khóa API Google AI Studio của bạn trong phần 'Trợ giúp & Hỗ trợ'.",
+            disabledMessageChat: "Trợ lý AI hiện đang ngoại tuyến. Để bật nó, vui lòng cung cấp khóa API Google AI Studio của riêng bạn trong tab 'Khóa API' trong phần 'Trợ giúp & Hỗ trợ'.",
+            disabledPlaceholder: "Cài đặt Khóa API để bật chat...",
+            buttonText: "Đi đến Cài đặt Khóa API"
+        }
     }
   }
 };

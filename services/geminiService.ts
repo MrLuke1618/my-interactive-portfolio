@@ -1,17 +1,25 @@
 
 
 import { GoogleGenAI, Type } from '@google/genai';
-import { Language, ChatMessage } from './types';
+import { Language } from '../types';
 
-const API_KEY = process.env.API_KEY;
+// Use 'let' to allow re-initialization
+let ai: GoogleGenAI | null = null;
 
-// Initialize ai instance, but don't throw an error if the key is missing.
-// This prevents the app from crashing on environments like GitHub Pages.
-const ai = API_KEY ? new GoogleGenAI({ apiKey: API_KEY }) : null;
+/**
+ * Initializes or re-initializes the GoogleGenAI instance.
+ * @param apiKey The API key to use. If empty or null, the instance will be cleared.
+ */
+export const initializeAi = (apiKey: string) => {
+    if (apiKey) {
+        ai = new GoogleGenAI({ apiKey });
+        console.log("Gemini AI Service Initialized.");
+    } else {
+        ai = null;
+        console.warn("Gemini AI Service De-initialized. API key cleared.");
+    }
+};
 
-if (!ai) {
-    console.warn("Google AI API Key not found. AI features will be disabled.");
-}
 
 const getMissingApiKeyError = () => new Error("AI features are unavailable. The API key is not configured for this deployment environment.");
 
@@ -61,7 +69,10 @@ const callGemini = async (prompt: string, schema: any) => {
             },
         });
 
-        const jsonStr = response.text.trim();
+        const jsonStr = (response.text ?? '').trim();
+        if (!jsonStr) {
+            throw new Error("The AI returned an empty response. Please try again.");
+        }
         try {
             return JSON.parse(jsonStr);
         } catch (parseError) {
@@ -69,10 +80,10 @@ const callGemini = async (prompt: string, schema: any) => {
              throw new Error("The AI returned an unexpected format. Please try again.");
         }
     } catch (e) {
-        // If it's already our custom error, re-throw it.
-        if (e.message.includes("API key is not configured")) throw e;
+        if (e instanceof Error && e.message.includes("API key is not configured")) throw e;
         
         console.error("Gemini API call failed", e);
+        if (e instanceof Error) throw e;
         throw new Error("Failed to get a response from the AI. Please check your connection and try again.");
     }
 }
@@ -80,7 +91,7 @@ const callGemini = async (prompt: string, schema: any) => {
 
 export const getChatbotResponse = async (prompt: string, history: {role: 'user' | 'model', parts: {text: string}[]}[]): Promise<string> => {
     if (!ai) {
-        return "I'm sorry, I cannot respond. The AI assistant is not configured for this live environment because an API key is missing.";
+        throw getMissingApiKeyError();
     }
     try {
         const response = await ai.models.generateContent({
@@ -90,7 +101,7 @@ export const getChatbotResponse = async (prompt: string, history: {role: 'user' 
                 systemInstruction: chatbotSystemInstruction,
             },
         });
-        return response.text;
+        return response.text ?? '';
     } catch (e) {
         console.error("Gemini API call failed", e);
         return "I'm sorry, I'm having trouble connecting right now. Please try again in a moment.";
@@ -121,7 +132,7 @@ export const generateYoutubeTitles = async (topic: string, tone: string, languag
     return result.titles || [];
 };
 
-export const countWordsInScript = async (script: string, language: Language): Promise<{ wordCount: number }> => {
+export const countWordsInScript = async (script: string, _language: Language): Promise<{ wordCount: number }> => {
     const schema = {
         type: Type.OBJECT,
         properties: {
@@ -129,7 +140,6 @@ export const countWordsInScript = async (script: string, language: Language): Pr
         },
         required: ['wordCount']
     };
-    const langInstruction = language === 'vi' ? 'Vietnamese' : 'English';
     const prompt = `Count the number of words in the following script. Respond only with the JSON object containing the word count. Script: "${script}"`
     return await callGemini(prompt, schema);
 };
