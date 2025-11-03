@@ -1,8 +1,5 @@
-
-
-
 import { type LanguageData } from './types';
-import { User, Briefcase, Lightbulb, GraduationCap, Star, Link2, Youtube, Linkedin, FileText, Video, FileCode2, TextCursorInput, Timer, Newspaper, Languages, Gamepad2, HelpCircle } from 'lucide-react';
+import { User, Briefcase, Lightbulb, GraduationCap, Star, Link2, Youtube, Linkedin, FileText, Video, FileCode2 } from 'lucide-react';
 
 export const i18n: { en: LanguageData; vi: LanguageData } = {
   en: {
@@ -18,13 +15,6 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
       { type: 'link', id: 'education', title: 'Education', icon: GraduationCap },
       { type: 'link', id: 'skills', title: 'Skills', icon: Star },
       { type: 'link', id: 'links', title: 'Social & Links', icon: Link2 },
-      { type: 'header', title: 'AI Toolbox Demo' },
-      { type: 'link', id: 'youtube-title-generator', title: 'YouTube Title Generator', icon: TextCursorInput },
-      { type: 'link', id: 'script-timer', title: 'Script Timer', icon: Timer },
-      { type: 'link', id: 'headline-generator', title: 'Headline Generator', icon: Newspaper },
-      { type: 'link', id: 'idiom-explainer', title: 'Idiom Explainer', icon: Languages },
-      { type: 'link', id: 'clan-name-generator', title: 'Clan Name Generator', icon: Gamepad2 },
-      { type: 'link', id: 'help-and-support', title: 'Help & Support', icon: HelpCircle },
     ],
     viewTitles: {
         summary: 'Professional Summary',
@@ -33,14 +23,8 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         education: 'Education',
         skills: 'Skills',
         links: 'Social Media & Links',
-        youtubeTitleGenerator: 'AI-Powered YouTube Title Generator',
-        scriptTimer: 'AI Script Read-Time Estimator',
-        headlineGenerator: 'AI News Headline Generator',
-        idiomExplainer: 'AI-Powered Idiom Explainer',
-        clanNameGenerator: 'AI Gaming Clan Name Generator',
-        helpAndSupport: 'Help & Support',
     },
-    summaryText: "Hello, I'm Hoang. With over six years of experience as a Video and News Editor, I specialize in enhancing content clarity and engaging readers across multiple platforms. My expertise in video editing, Figma, and Canva has enabled me to produce impactful cryptocurrency videos and author over 1,000 articles. I'm passionate about merging my skills in social media and software development to pioneer innovative content strategies, drive audience interaction, and build the powerful AI tools you see here.",
+    summaryText: "Hello, I'm Hoang. With over six years of experience as a Video and News Editor, I specialize in enhancing content clarity and engaging readers across multiple platforms. My expertise in video editing, Figma, and Canva has enabled me to produce impactful cryptocurrency videos and author over 1,000 articles. I'm passionate about merging my skills in social media and software development to pioneer innovative content strategies, drive audience interaction, and build powerful applications.",
     experienceData: [
         { 
             role: 'VIDEO EDITOR/NEWS EDITOR',
@@ -151,143 +135,6 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         { name: 'IELTS 7.5', url: 'https://drive.google.com/file/d/11RWK0L2g-zs440j-dh8ig5RMIpG0KIWY/view?usp=sharing', icon: FileText },
         { name: 'TOEIC 960', url: 'https://drive.google.com/file/d/1vT5oUbCPYPcBTH50dfzlVG-sl9FPvUcV/view?usp=sharing', icon: FileText },
     ],
-    toolStrings: {
-        youtubeTitleGenerator: {
-            topicLabel: 'Video Topic or Idea',
-            topicDescription: 'Describe your video in a few words. The more specific, the better the titles!',
-            topicPlaceholder: "e.g., 'Unboxing the new iPhone 15 Pro Max and first impressions'",
-            toneLabel: 'Select a Tone',
-            tones: {
-                Professional: 'Professional',
-                Casual: 'Casual',
-                Clickbait: 'Clickbait',
-            },
-            buttonText: 'Generate Titles',
-            resultsTitle: 'Generated Titles',
-            error: 'Please enter a video topic.',
-            reasoningLabel: 'AI Reasoning',
-            loadingMessages: ['Analyzing your topic...', 'Brainstorming creative titles...', 'Adding SEO magic...'],
-        },
-        scriptTimer: {
-            scriptLabel: 'Video Script',
-            scriptDescription: 'Paste your script to estimate its read time.',
-            scriptPlaceholder: 'Paste your script here...',
-            wpmLabel: 'Words Per Minute (WPM)',
-            buttonText: 'Estimate Time',
-            resultsTitle: 'Estimation Result',
-            estimatedTimeLabel: 'Estimated Read Time',
-            wordCountLabel: 'Word Count',
-            error: 'Please enter a script.',
-            minute: 'minute',
-            minutes: 'minutes',
-            second: 'second',
-            seconds: 'seconds',
-            lessThanASecond: 'Less than a second'
-        },
-        headlineGenerator: {
-            topicLabel: 'Article Topic or Summary',
-            topicDescription: 'Provide a topic to generate compelling, click-worthy headlines.',
-            topicPlaceholder: "e.g., 'The impact of AI on modern journalism'",
-            audienceLabel: 'Target Audience (Optional)',
-            audiencePlaceholder: "e.g., 'Tech Enthusiasts', 'Students'",
-            buttonText: 'Generate Headlines',
-            resultsTitle: 'Generated Headlines',
-            error: 'Please enter a topic.',
-            reasoningLabel: 'AI Reasoning',
-            loadingMessages: ['Scanning the topic...', 'Crafting witty headlines...', 'Tailoring for your audience...'],
-        },
-        idiomExplainer: {
-            idiomLabel: 'Idiom or Phrase',
-            idiomDescription: 'Enter an idiom to get its meaning, an example, and cultural equivalents.',
-            idiomPlaceholder: "e.g., 'Bite the bullet'",
-            buttonText: 'Explain Idiom',
-            resultsTitle: 'Explanation',
-            meaningLabel: 'Meaning',
-            dialogueLabel: 'Example Dialogue',
-            equivalentLabel: 'Contextual Equivalent',
-            error: 'Please enter an idiom.',
-            reasoningLabel: 'Why this dialogue works',
-            loadingMessages: ['Consulting the dictionary...', 'Understanding the nuance...', 'Creating a scenario...'],
-        },
-        clanNameGenerator: {
-            themeLabel: 'Clan Theme',
-            themeDescription: "Enter a theme like 'Cyberpunk', 'Fantasy', 'Viking', or 'Cosmic' to generate clan names.",
-            themePlaceholder: "e.g., 'Shadow Ninjas'",
-            countLabel: 'Number of Names',
-            buttonText: 'Generate Names',
-            resultsTitle: 'Generated Names',
-            error: 'Please enter a theme.',
-            reasoningLabel: 'AI Reasoning',
-            loadingMessages: ['Entering the creative forge...', 'Summoning epic names...', 'Adding historical context...'],
-        },
-        chat: {
-            placeholder: "Ask a question or type 'play a game'...",
-            buttonText: "Send",
-            askThisQuestion: "Ask this question"
-        }
-    },
-    helpAndSupport: {
-        guideTitle: "Feature Guide",
-        chatTitle: "AI Chat Assistant",
-        portfolioTab: "Portfolio Guide",
-        toolboxTab: "AI Toolbox Guide",
-        portfolioContent: {
-            heading: "What is the Portfolio Section?",
-            p1: "This section is a comprehensive showcase of my professional journey. It includes my resume, work experience, educational background, and a curated list of my key projects. It's designed to give you a quick yet detailed overview of my skills and accomplishments.",
-            p2: "The summary section also features an interactive dashboard. Use it to quickly jump to key areas like my Experience, AI Projects, Education, and Skills."
-        },
-        toolboxContent: {
-            heading: "What is the AI Toolbox Demo?",
-            p1: "The AI Toolbox is an interactive collection of AI-powered mini-applications that I've built. Each tool is designed to solve a specific problem for a particular audience, from content creators and translators to gamers.",
-            p2: "These demos showcase my ability to leverage the Gemini API to create practical and creative solutions. Feel free to play around with them, as they are all fully functional."
-        },
-        faqs: [
-            {
-                question: "Is there a hidden feature?",
-                answer: "There might be! I hear the AI assistant is a bit playful. Why not ask it to 'play a game' and see what happens?"
-            },
-            {
-                question: "What is the dashboard on the summary page?",
-                answer: "The dashboard is a set of quick navigation buttons designed to help you jump straight to the most important sections of my portfolio, like my Work Experience, AI Projects, and Skills, right from the summary page."
-            },
-            {
-                question: "Are the AI tools in the toolbox functional?",
-                answer: "Absolutely! Every tool in the AI Toolbox Demo is a fully functional mini-app."
-            },
-            {
-                question: "What are your key skills?",
-                answer: "I'm experienced in Video Editing and News Editing, and skillful in AI App Development, Figma, Canva, and Unity, among others."
-            },
-            {
-                question: "How long have you been in the media industry?",
-                answer: "I have over six years of experience in the media industry, specializing in video and news content."
-            },
-            {
-                question: "What was your proudest achievement?",
-                answer: "Growing a YouTube channel from 1,000 to 72,000 subscribers at Lotus Media was a major highlight for me."
-            },
-            {
-                question: "What did you study?",
-                answer: "I have a Bachelor's in Information Technology and I'm currently pursuing a Master's in Communication and Media Studies at Dublin City University."
-            },
-            {
-                question: "How can I contact you?",
-                answer: "The best way to reach me professionally is through my [LinkedIn profile](https://www.linkedin.com/in/hoangminhcao)."
-            },
-            {
-                question: "Tell me about your Master's degree.",
-                answer: "I'm studying Communication and Media Studies at Dublin City University. My major project is a WebGL app called 'The Sailboat,' but you can see my other projects in the Education section."
-            },
-            {
-                question: "What inspires your AI tools?",
-                answer: "My diverse background! For instance, my experience as a YouTuber inspired the Title Generator, and my love for gaming led to the Clan Name Generator."
-            },
-            {
-                question: "What is this portfolio website built with?",
-                answer: "This is a custom-built interactive portfolio using React, TypeScript, and Tailwind CSS, powered by the Google Gemini API for its AI features."
-            }
-        ]
-    }
   },
   vi: {
     header: {
@@ -302,13 +149,6 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         { type: 'link', id: 'education', title: 'Học vấn', icon: GraduationCap },
         { type: 'link', id: 'skills', title: 'Kỹ năng', icon: Star },
         { type: 'link', id: 'links', title: 'Mạng xã hội & Liên kết', icon: Link2 },
-        { type: 'header', title: 'Demo Hộp công cụ AI' },
-        { type: 'link', id: 'youtube-title-generator', title: 'Tạo Tiêu đề YouTube', icon: TextCursorInput },
-        { type: 'link', id: 'script-timer', title: 'Đo thời lượng kịch bản', icon: Timer },
-        { type: 'link', id: 'headline-generator', title: 'Tạo tiêu đề', icon: Newspaper },
-        { type: 'link', id: 'idiom-explainer', title: 'Giải thích thành ngữ', icon: Languages },
-        { type: 'link', id: 'clan-name-generator', title: 'Tạo tên Clan', icon: Gamepad2 },
-        { type: 'link', id: 'help-and-support', title: 'Trợ giúp & Hỗ trợ', icon: HelpCircle },
     ],
     viewTitles: {
         summary: 'Tóm tắt chuyên môn',
@@ -317,14 +157,8 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         education: 'Học vấn',
         skills: 'Các kỹ năng',
         links: 'Mạng xã hội & Liên kết',
-        youtubeTitleGenerator: 'Công cụ tạo tiêu đề YouTube bằng AI',
-        scriptTimer: 'Công cụ ước tính thời gian đọc kịch bản bằng AI',
-        headlineGenerator: 'Công cụ tạo tiêu đề tin tức bằng AI',
-        idiomExplainer: 'Công cụ giải thích thành ngữ bằng AI',
-        clanNameGenerator: 'Công cụ tạo tên Clan Game bằng AI',
-        helpAndSupport: 'Trợ giúp & Hỗ trợ',
     },
-    summaryText: "Xin chào, tôi là Hoàng. Với hơn sáu năm kinh nghiệm làm Biên tập viên Video và Tin tức, tôi chuyên nâng cao sự rõ ràng của nội dung và thu hút người đọc trên nhiều nền tảng. Chuyên môn của tôi về chỉnh sửa video, Figma và Canva đã giúp tôi sản xuất các video về tiền điện tử có sức ảnh hưởng và viết hơn 1.000 bài báo. Tôi đam mê kết hợp các kỹ năng của mình trong quản lý mạng xã hội và phát triển phần mềm để đi tiên phong trong các chiến lược nội dung sáng tạo, thúc đẩy tương tác của khán giả và xây dựng các công cụ AI mạnh mẽ mà bạn thấy ở đây.",
+    summaryText: "Xin chào, tôi là Hoàng. Với hơn sáu năm kinh nghiệm làm Biên tập viên Video và Tin tức, tôi chuyên nâng cao sự rõ ràng của nội dung và thu hút người đọc trên nhiều nền tảng. Chuyên môn của tôi về chỉnh sửa video, Figma và Canva đã giúp tôi sản xuất các video về tiền điện tử có sức ảnh hưởng và viết hơn 1.000 bài báo. Tôi đam mê kết hợp các kỹ năng của mình trong quản lý mạng xã hội và phát triển phần mềm để đi tiên phong trong các chiến lược nội dung sáng tạo, thúc đẩy tương tác của khán giả và xây dựng các ứng dụng mạnh mẽ.",
     experienceData: [
         { 
             role: 'BIÊN TẬP VIÊN VIDEO/TIN TỨC',
@@ -435,142 +269,5 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         { name: 'IELTS 7.5', url: 'https://drive.google.com/file/d/11RWK0L2g-zs440j-dh8ig5RMIpG0KIWY/view?usp=sharing', icon: FileText },
         { name: 'TOEIC 960', url: 'https://drive.google.com/file/d/1vT5oUbCPYPcBTH50dfzlVG-sl9FPvUcV/view?usp=sharing', icon: FileText },
     ],
-    toolStrings: {
-        youtubeTitleGenerator: {
-            topicLabel: 'Chủ đề hoặc ý tưởng video',
-            topicDescription: 'Mô tả video của bạn trong vài từ. Càng cụ thể, tiêu đề càng hay!',
-            topicPlaceholder: "ví dụ: 'Mở hộp iPhone 15 Pro Max mới và những ấn tượng đầu tiên'",
-            toneLabel: 'Chọn một giọng văn',
-            tones: {
-                Professional: 'Chuyên nghiệp',
-                Casual: 'Thân mật',
-                Clickbait: 'Giật gân',
-            },
-            buttonText: 'Tạo tiêu đề',
-            resultsTitle: 'Các tiêu đề được tạo',
-            error: 'Vui lòng nhập chủ đề video.',
-            reasoningLabel: 'Lý giải của AI',
-            loadingMessages: ['Đang phân tích chủ đề...', 'Lên ý tưởng sáng tạo...', 'Thêm phép màu SEO...'],
-        },
-        scriptTimer: {
-            scriptLabel: 'Kịch bản video',
-            scriptDescription: 'Dán kịch bản của bạn để ước tính thời gian đọc.',
-            scriptPlaceholder: 'Dán kịch bản của bạn vào đây...',
-            wpmLabel: 'Số từ mỗi phút (WPM)',
-            buttonText: 'Ước tính thời gian',
-            resultsTitle: 'Kết quả ước tính',
-            estimatedTimeLabel: 'Thời gian đọc ước tính',
-            wordCountLabel: 'Số lượng từ',
-            error: 'Vui lòng nhập kịch bản.',
-            minute: 'phút',
-            minutes: 'phút',
-            second: 'giây',
-            seconds: 'giây',
-            lessThanASecond: 'Chưa tới một giây'
-        },
-        headlineGenerator: {
-            topicLabel: 'Chủ đề hoặc tóm tắt bài viết',
-            topicDescription: 'Cung cấp chủ đề để tạo ra các tiêu đề hấp dẫn, đáng để nhấp chuột.',
-            topicPlaceholder: "ví dụ: 'Tác động của AI đối với báo chí hiện đại'",
-            audienceLabel: 'Đối tượng mục tiêu (Tùy chọn)',
-            audiencePlaceholder: "ví dụ: 'Người yêu công nghệ', 'Sinh viên'",
-            buttonText: 'Tạo tiêu đề',
-            resultsTitle: 'Các tiêu đề được tạo',
-            error: 'Vui lòng nhập chủ đề.',
-            reasoningLabel: 'Lý giải của AI',
-            loadingMessages: ['Đang quét chủ đề...', 'Soạn tiêu đề hấp dẫn...', 'Điều chỉnh cho khán giả...'],
-        },
-        idiomExplainer: {
-            idiomLabel: 'Thành ngữ hoặc cụm từ',
-            idiomDescription: 'Nhập một thành ngữ để biết ý nghĩa, ví dụ và các từ tương đương về mặt văn hóa.',
-            idiomPlaceholder: "ví dụ: 'Nước đến chân mới nhảy'",
-            buttonText: 'Giải thích thành ngữ',
-            resultsTitle: 'Giải thích',
-            meaningLabel: 'Ý nghĩa',
-            dialogueLabel: 'Hội thoại ví dụ',
-            equivalentLabel: 'Tương đương theo ngữ cảnh',
-            error: 'Vui lòng nhập một thành ngữ.',
-            reasoningLabel: 'Tại sao hội thoại này phù hợp',
-            loadingMessages: ['Tra cứu từ điển...', 'Tìm hiểu sắc thái nghĩa...', 'Tạo kịch bản...'],
-        },
-        clanNameGenerator: {
-            themeLabel: 'Chủ đề Clan',
-            themeDescription: "Nhập một chủ đề như 'Cyberpunk', 'Fantasy', 'Viking', hoặc 'Cosmic' để tạo tên clan.",
-            themePlaceholder: "ví dụ: 'Ninja bóng đêm'",
-            countLabel: 'Số lượng tên',
-            buttonText: 'Tạo tên',
-            resultsTitle: 'Các tên được tạo',
-            error: 'Vui lòng nhập một chủ đề.',
-            reasoningLabel: 'Lý giải của AI',
-            loadingMessages: ['Vào lò rèn sáng tạo...', 'Triệu hồi những cái tên huyền thoại...', 'Thêm bối cảnh lịch sử...'],
-        },
-        chat: {
-            placeholder: "Đặt câu hỏi hoặc gõ 'chơi trò chơi'...",
-            buttonText: "Gửi",
-            askThisQuestion: "Hỏi câu này"
-        }
-    },
-    helpAndSupport: {
-        guideTitle: "Hướng dẫn tính năng",
-        chatTitle: "Trợ lý Chat AI",
-        portfolioTab: "Hướng dẫn Portfolio",
-        toolboxTab: "Hướng dẫn Hộp công cụ AI",
-        portfolioContent: {
-            heading: "Phần Portfolio là gì?",
-            p1: "Phần này là một buổi giới thiệu toàn diện về hành trình chuyên nghiệp của tôi. Nó bao gồm sơ yếu lý lịch, kinh nghiệm làm việc, nền tảng giáo dục và danh sách các dự án chính của tôi. Nó được thiết kế để cung cấp cho bạn một cái nhìn tổng quan nhanh chóng nhưng chi tiết về các kỹ năng và thành tích của tôi.",
-            p2: "Phần tóm tắt cũng có một bảng điều khiển tương tác. Sử dụng nó để nhanh chóng chuyển đến các phần chính như Kinh nghiệm, Dự án AI, Học vấn và Kỹ năng của tôi."
-        },
-        toolboxContent: {
-            heading: "Demo Hộp công cụ AI là gì?",
-            p1: "Hộp công cụ AI là một bộ sưu tập tương tác các ứng dụng nhỏ do AI cung cấp mà tôi đã xây dựng. Mỗi công cụ được thiết kế để giải quyết một vấn đề cụ thể cho một đối tượng cụ thể, từ người tạo nội dung và dịch giả đến game thủ.",
-            p2: "Những bản demo này thể hiện khả năng của tôi trong việc tận dụng Gemini API để tạo ra các giải pháp thực tế và sáng tạo. Hãy thoải mái thử nghiệm chúng vì tất cả đều hoạt động đầy đủ."
-        },
-        faqs: [
-            {
-                question: "Có tính năng ẩn nào không?",
-                answer: "Có thể có đấy! Tôi nghe nói trợ lý AI này khá tinh nghịch. Tại sao bạn không thử yêu cầu nó 'chơi một trò chơi' xem sao?"
-            },
-            {
-                question: "Bảng điều khiển trên trang tóm tắt là gì?",
-                answer: "Bảng điều khiển là một bộ các nút điều hướng nhanh được thiết kế để giúp bạn chuyển thẳng đến các phần quan trọng nhất trong portfolio của tôi, như Kinh nghiệm làm việc, Dự án AI và Kỹ năng, ngay từ trang tóm tắt."
-            },
-            {
-                question: "Các công cụ AI trong hộp công cụ có hoạt động không?",
-                answer: "Chắc chắn rồi! Mọi công cụ trong Demo Hộp công cụ AI đều là các ứng dụng nhỏ hoạt động đầy đủ."
-            },
-            {
-                question: "Kỹ năng chính của bạn là gì?",
-                answer: "Tôi có kinh nghiệm về Chỉnh sửa Video và Biên tập Tin tức, và thành thạo về Phát triển Ứng dụng AI, Figma, Canva, và Unity, cùng các kỹ năng khác."
-            },
-            {
-                question: "Bạn đã làm trong ngành truyền thông bao lâu rồi?",
-                answer: "Tôi có hơn sáu năm kinh nghiệm trong ngành truyền thông, chuyên về nội dung video và tin tức."
-            },
-            {
-                question: "Thành tựu đáng tự hào nhất của bạn là gì?",
-                answer: "Việc phát triển một kênh YouTube từ 1.000 lên 72.000 người đăng ký tại Lotus Media là một trong những điểm nhấn lớn nhất của tôi."
-            },
-            {
-                question: "Bạn đã học ngành gì?",
-                answer: "Tôi có bằng Cử nhân Công nghệ Thông tin và hiện đang theo học Thạc sĩ ngành Nghiên cứu Truyền thông và Phương tiện tại Đại học Dublin City."
-            },
-            {
-                question: "Làm thế nào để liên lạc với bạn?",
-                answer: "Cách tốt nhất để kết nối chuyên nghiệp với tôi là qua [hồ sơ LinkedIn](https://www.linkedin.com/in/hoangminhcao)."
-            },
-            {
-                question: "Hãy cho tôi biết về bằng Thạc sĩ của bạn.",
-                answer: "Tôi đang học ngành Nghiên cứu Truyền thông và Phương tiện tại Đại học Dublin City. Dự án lớn của tôi là một ứng dụng WebGL tên là 'The Sailboat,' nhưng bạn có thể xem các dự án khác của tôi trong phần Học vấn."
-            },
-            {
-                question: "Điều gì truyền cảm hứng cho các công cụ AI của bạn?",
-                answer: "Nền tảng đa dạng của tôi! Ví dụ, kinh nghiệm làm YouTuber đã truyền cảm hứng cho Công cụ Tạo Tiêu đề, và tình yêu của tôi với game đã dẫn đến Công cụ Tạo Tên Clan."
-            },
-            {
-                question: "Trang web portfolio này được xây dựng bằng gì?",
-                answer: "Đây là một portfolio tương tác được xây dựng tùy chỉnh bằng React, TypeScript, và Tailwind CSS, được cung cấp bởi Google Gemini API cho các tính năng AI của nó."
-            }
-        ]
-    }
   }
 };
