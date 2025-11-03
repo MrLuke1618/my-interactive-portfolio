@@ -1,5 +1,4 @@
 
-
 import { type LanguageData } from './types';
 import { User, Briefcase, Lightbulb, GraduationCap, Star, Link2, Youtube, Linkedin, FileText, Video, FileCode2, TextCursorInput, Timer, Newspaper, Languages, Gamepad2, HelpCircle } from 'lucide-react';
 
@@ -238,7 +237,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         toolboxContent: {
             heading: "What is the AI Toolbox Demo?",
             p1: "The AI Toolbox is an interactive collection of AI-powered mini-applications that I've built. Each tool is designed to solve a specific problem for a particular audience, from content creators and translators to gamers.",
-            p2: "These demos showcase my ability to leverage the Gemini API to create practical and creative solutions. Feel free to play around with them! They are all fully functional if you provide an API key."
+            p2: "These demos showcase my ability to leverage the Gemini API to create practical and creative solutions. Feel free to play around with them! They are all fully functional, assuming an API key is provided in the environment."
         },
         faqs: [
             {
@@ -263,7 +262,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
             },
             {
                 question: "Are the AI tools in the toolbox functional?",
-                answer: "Absolutely! Every tool in the AI Toolbox Demo is a fully functional mini-app. To use them on this live site, you'll need to provide your own Google AI Studio API Key in the 'API Key' tab under 'Help & Support'."
+                answer: "Absolutely! Every tool in the AI Toolbox Demo is a fully functional mini-app. They rely on a Google AI Studio API Key being available in the environment to work."
             },
             {
                 question: "How can I contact you?",
@@ -281,25 +280,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
                 question: "What is this portfolio website built with?",
                 answer: "This is a custom-built interactive portfolio using React, TypeScript, and Tailwind CSS, powered by the Google Gemini API for its AI features."
             }
-        ],
-        apiKeySetup: {
-            title: "API Key",
-            heading: "Set Your API Key",
-            p1: "To activate the AI features on this live demo, you need to provide your own Google AI Studio API key.",
-            p2: "Your key is saved securely in your browser's local storage and is never sent to any server but Google's. You can get your own free key from",
-            linkText: "Google AI Studio",
-            inputLabel: "Your Google AI Studio API Key",
-            inputPlaceholder: "Paste your API key here",
-            saveButton: "Save Key",
-            clearButton: "Clear Key",
-            statusSet: "API Key is set and active.",
-            statusNotSet: "API Key not found.",
-            disabledTitle: "AI Feature Disabled",
-            disabledMessage: "To use this tool, please set your Google AI Studio API key in the 'Help & Support' section.",
-            disabledMessageChat: "The AI assistant is currently offline. To enable it, please provide your own Google AI Studio API key in the 'API Key' tab within the 'Help & Support' section.",
-            disabledPlaceholder: "Set API Key to enable chat...",
-            buttonText: "Go to API Key Setup"
-        }
+        ]
     }
   },
   vi: {
@@ -536,7 +517,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
         toolboxContent: {
             heading: "Demo Hộp công cụ AI là gì?",
             p1: "Hộp công cụ AI là một bộ sưu tập tương tác các ứng dụng nhỏ do AI cung cấp mà tôi đã xây dựng. Mỗi công cụ được thiết kế để giải quyết một vấn đề cụ thể cho một đối tượng cụ thể, từ người tạo nội dung và dịch giả đến game thủ.",
-            p2: "Những bản demo này thể hiện khả năng của tôi trong việc tận dụng Gemini API để tạo ra các giải pháp thực tế và sáng tạo. Hãy thoải mái thử nghiệm chúng! Tất cả đều hoạt động đầy đủ nếu bạn cung cấp khóa API."
+            p2: "Những bản demo này thể hiện khả năng của tôi trong việc tận dụng Gemini API để tạo ra các giải pháp thực tế và sáng tạo. Hãy thoải mái thử nghiệm chúng! Tất cả đều hoạt động đầy đủ, miễn là khóa API được cung cấp trong môi trường."
         },
         faqs: [
             {
@@ -561,7 +542,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
             },
             {
                 question: "Các công cụ AI trong hộp công cụ có hoạt động không?",
-                answer: "Chắc chắn rồi! Mọi công cụ trong Demo Hộp công cụ AI đều là các ứng dụng nhỏ hoạt động đầy đủ. Để sử dụng chúng trên trang web này, bạn cần cung cấp Khóa API Google AI Studio của riêng mình trong tab 'Khóa API' dưới mục 'Trợ giúp & Hỗ trợ'."
+                answer: "Chắc chắn rồi! Mọi công cụ trong Demo Hộp công cụ AI đều là các ứng dụng nhỏ hoạt động đầy đủ. Chúng dựa vào Khóa API Google AI Studio có sẵn trong môi trường để hoạt động."
             },
             {
                 question: "Làm thế nào để liên lạc với bạn?",
@@ -579,25 +560,7 @@ export const i18n: { en: LanguageData; vi: LanguageData } = {
                 question: "Trang web portfolio này được xây dựng bằng gì?",
                 answer: "Đây là một portfolio tương tác được xây dựng tùy chỉnh bằng React, TypeScript, và Tailwind CSS, được cung cấp bởi Google Gemini API cho các tính năng AI của nó."
             }
-        ],
-        apiKeySetup: {
-            title: "Khóa API",
-            heading: "Cài đặt Khóa API của bạn",
-            p1: "Để kích hoạt các tính năng AI trên bản demo này, bạn cần cung cấp khóa API Google AI Studio của riêng mình.",
-            p2: "Khóa của bạn được lưu trữ an toàn trong bộ nhớ cục bộ của trình duyệt và không bao giờ được gửi đến bất kỳ máy chủ nào ngoài Google. Bạn có thể nhận khóa miễn phí của riêng mình từ",
-            linkText: "Google AI Studio",
-            inputLabel: "Khóa API Google AI Studio của bạn",
-            inputPlaceholder: "Dán khóa API của bạn vào đây",
-            saveButton: "Lưu khóa",
-            clearButton: "Xóa khóa",
-            statusSet: "Khóa API đã được thiết lập và đang hoạt động.",
-            statusNotSet: "Không tìm thấy khóa API.",
-            disabledTitle: "Tính năng AI đã bị vô hiệu hóa",
-            disabledMessage: "Để sử dụng công cụ này, vui lòng thiết lập khóa API Google AI Studio của bạn trong phần 'Trợ giúp & Hỗ trợ'.",
-            disabledMessageChat: "Trợ lý AI hiện đang ngoại tuyến. Để bật nó, vui lòng cung cấp khóa API Google AI Studio của riêng bạn trong tab 'Khóa API' trong phần 'Trợ giúp & Hỗ trợ'.",
-            disabledPlaceholder: "Cài đặt Khóa API để bật chat...",
-            buttonText: "Đi đến Cài đặt Khóa API"
-        }
+        ]
     }
   }
 };

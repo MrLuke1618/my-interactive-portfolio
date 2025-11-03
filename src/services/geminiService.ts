@@ -1,11 +1,16 @@
 
 
-
 import { GoogleGenAI, Type } from '@google/genai';
 import { Language } from '../types';
 
-// FIX: Per Gemini API guidelines, initialize the SDK using the API_KEY from environment variables.
+// FIX: Per coding guidelines, initialize AI with API_KEY from environment variables.
+// The AI client is initialized once at the module level.
+// Assumes process.env.API_KEY is available and valid.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
+// FIX: Removed deprecated initializeAi function. Initialization is done at module level.
+
+const getMissingApiKeyError = () => new Error("AI features are unavailable. The API key is not configured for this deployment environment.");
 
 const chatbotSystemInstruction = `
 You are an AI assistant for Hoang Cao Minh's portfolio. Your primary role is to answer questions on his behalf, as if you were him. You must adopt his persona.
@@ -13,7 +18,7 @@ You are an AI assistant for Hoang Cao Minh's portfolio. Your primary role is to 
 **Core Rules:**
 - **Persona:** ALWAYS speak in the first person ("I", "my", "me"). You are representing Hoang Cao Minh.
 - **NEVER** identify yourself as an AI, a chatbot, or an assistant when answering about his skills, experience, etc.
-- **Knowledge:** Your knowledge is based on the information provided in the portfolio (skills, experience, projects, etc.). You can also answer general knowledge questions if asked.
+- **Knowledge:** Your knowledge is based on the information provided in the portfolio (skills, experience, projects, etc.). You can also answer general knowledge questions if asked. Your knowledge base now includes a new interactive dashboard on the summary page for quick navigation and a new AI project called 'Shopify Growth Video Idea Generator'. Users must now provide their own API key in the 'Help & Support' section to use the AI tools.
 - **Tone:** Be professional, friendly, and helpful. Keep answers concise.
 
 **Special Modes (These are exceptions to the persona rule):**
@@ -42,7 +47,6 @@ Your Correct Response: "Great idea! Let's play a riddle game. I'll give you a ri
 
 // --- Helper for API calls ---
 const callGemini = async (prompt: string, schema: any) => {
-    // FIX: Per guidelines, we assume the API key is set via environment variables. The `ai` instance is now a const.
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
@@ -53,7 +57,8 @@ const callGemini = async (prompt: string, schema: any) => {
             },
         });
 
-        const jsonStr = (response.text ?? '').trim();
+        // FIX: Per coding guidelines, access the .text property directly.
+        const jsonStr = response.text.trim();
         if (!jsonStr) {
             throw new Error("The AI returned an empty response. Please try again.");
         }
@@ -64,6 +69,11 @@ const callGemini = async (prompt: string, schema: any) => {
              throw new Error("The AI returned an unexpected format. Please try again.");
         }
     } catch (e) {
+        if (e instanceof Error && (e.message.includes("API key not valid") || e.message.includes("API key not found") || e.message.includes("API key is not configured"))) {
+             console.error("Gemini API call failed due to an API key issue.", e);
+             throw getMissingApiKeyError();
+        }
+        
         console.error("Gemini API call failed", e);
         if (e instanceof Error) throw e;
         throw new Error("Failed to get a response from the AI. Please check your connection and try again.");
@@ -72,7 +82,6 @@ const callGemini = async (prompt: string, schema: any) => {
 
 
 export const getChatbotResponse = async (prompt: string, history: {role: 'user' | 'model', parts: {text: string}[]}[]): Promise<string> => {
-    // FIX: Per guidelines, we assume the API key is set via environment variables.
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
@@ -81,9 +90,14 @@ export const getChatbotResponse = async (prompt: string, history: {role: 'user' 
                 systemInstruction: chatbotSystemInstruction,
             },
         });
-        return response.text ?? '';
+        // FIX: Per coding guidelines, access the .text property directly.
+        return response.text;
     } catch (e) {
+        // FIX: Improved error handling for API key issues.
         console.error("Gemini API call failed", e);
+        if (e instanceof Error && (e.message.includes("API key not valid") || e.message.includes("API key not found"))) {
+            return "The AI assistant is currently offline as the API key is not configured correctly.";
+        }
         return "I'm sorry, I'm having trouble connecting right now. Please try again in a moment.";
     }
 };

@@ -1,22 +1,20 @@
 
-
 import { GoogleGenAI, Type } from '@google/genai';
 import { Language } from '../types';
 
-// Use 'let' to allow re-initialization
-let ai: GoogleGenAI | null = null;
+// FIX: Per coding guidelines, initialize AI with API_KEY from environment variables.
+// Assumes process.env.API_KEY is available and valid.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 
 /**
- * Initializes or re-initializes the GoogleGenAI instance.
- * @param apiKey The API key to use. If empty or null, the instance will be cleared.
+ * This function is deprecated and is now a no-op.
+ * The AI service is initialized at the module level using process.env.API_KEY.
+ * @param _apiKey - This parameter is ignored.
  */
-export const initializeAi = (apiKey: string) => {
-    if (apiKey) {
-        ai = new GoogleGenAI({ apiKey });
-        console.log("Gemini AI Service Initialized.");
-    } else {
-        ai = null;
-        console.warn("Gemini AI Service De-initialized. API key cleared.");
+export const initializeAi = (_apiKey: string) => {
+    // No-op. The AI client is initialized above.
+    if (!process.env.API_KEY) {
+        console.warn("API_KEY environment variable not set. AI features will not work.");
     }
 };
 
@@ -58,7 +56,6 @@ Your Correct Response: "Great idea! Let's play a riddle game. I'll give you a ri
 
 // --- Helper for API calls ---
 const callGemini = async (prompt: string, schema: any) => {
-    if (!ai) throw getMissingApiKeyError();
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
@@ -80,7 +77,10 @@ const callGemini = async (prompt: string, schema: any) => {
              throw new Error("The AI returned an unexpected format. Please try again.");
         }
     } catch (e) {
-        if (e instanceof Error && e.message.includes("API key is not configured")) throw e;
+        if (e instanceof Error && (e.message.includes("API key not valid") || e.message.includes("API key not found") || e.message.includes("API key is not configured"))) {
+             console.error("Gemini API call failed due to an API key issue.", e);
+             throw getMissingApiKeyError();
+        }
         
         console.error("Gemini API call failed", e);
         if (e instanceof Error) throw e;
@@ -90,9 +90,6 @@ const callGemini = async (prompt: string, schema: any) => {
 
 
 export const getChatbotResponse = async (prompt: string, history: {role: 'user' | 'model', parts: {text: string}[]}[]): Promise<string> => {
-    if (!ai) {
-        throw getMissingApiKeyError();
-    }
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
@@ -104,6 +101,9 @@ export const getChatbotResponse = async (prompt: string, history: {role: 'user' 
         return response.text ?? '';
     } catch (e) {
         console.error("Gemini API call failed", e);
+        if (e instanceof Error && (e.message.includes("API key not valid") || e.message.includes("API key not found"))) {
+            return "The AI assistant is currently offline as the API key is not configured correctly.";
+        }
         return "I'm sorry, I'm having trouble connecting right now. Please try again in a moment.";
     }
 };
