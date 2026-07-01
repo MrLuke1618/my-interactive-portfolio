@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://mrluke1618.github.io/my-interactive-portfolio",
+  "homepage": "https://MrLuke1618.github.io/my-interactive-portfolio",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "lucide-react": "^0.552.0",
+    "motion": "^12.42.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

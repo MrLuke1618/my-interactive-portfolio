@@ -27,6 +27,7 @@ export interface Experience {
   company: string;
   period: string;
   achievements: string[];
+  extraLinks?: { name: string; url: string }[];
 }
 
 export interface EducationProject {
